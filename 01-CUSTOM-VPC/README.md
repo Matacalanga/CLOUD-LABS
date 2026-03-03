@@ -30,11 +30,11 @@ This lab reinforces practical understanding of AWS networking, routing behavior,
 ---
 ## VPC Configuration
 
-![VPC Created](Images/vpc.png)
+![VPC Created](Images/vpc.jpeg)
 
 ## Subnets Configuration
 
-![Subnets](images/subnets.png)
+![Subnets](images/subnets.jpeg)
 
 ## Steps Performed
 
