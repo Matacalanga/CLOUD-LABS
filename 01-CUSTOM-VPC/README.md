@@ -3,6 +3,8 @@
 Hands-on AWS infrastructure lab focused on networking fundamentals, security configuration and EC2 deployment in a custom VPC environment.
 
 ---
+![diagrama](Images/diagrama.png)
+
 
 # 🇺🇸 English Version
 
