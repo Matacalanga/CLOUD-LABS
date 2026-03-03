@@ -28,13 +28,42 @@ This lab reinforces practical understanding of AWS networking, routing behavior,
   - HTTP (Port 80 – 0.0.0.0/0)
 
 ---
+
 ## VPC Configuration
 
-![VPC_Created](Images/vpc.jpeg)
+![vpc](Images/vpc.jpeg)
+
+---
 
 ## Subnets Configuration
 
-![VPC_Created](Images/subnets.jpeg)
+![subnets](Images/subnets.jpeg)
+
+---
+
+## Route Table Configuration
+
+![route table](Images/route-table.jpeg)
+
+---
+
+## Security Group Rules
+
+![security group](Images/security-group.png)
+
+---
+
+## EC2 Instance Running
+
+![ec2 running](Images/ec2-running.jpeg)
+
+---
+
+## HTTP Validation
+
+![http success](Images/http-success.jpeg)
+
+---
 
 ## Steps Performed
 
@@ -91,6 +120,42 @@ Este laboratório reforça o entendimento prático de redes na AWS, comportament
 - Security Group permitindo:
   - SSH (Porta 22 – restrito ao meu IP)
   - HTTP (Porta 80 – 0.0.0.0/0)
+
+---
+
+## Configuração da VPC
+
+![VPC Criada](Images/vpc.jpeg)
+
+---
+
+## Configuração das Subnets
+
+![subnets](Images/subnets.jpeg)
+
+---
+
+## Configuração da Tabela de Rotas
+
+![route table](Images/route-table.jpeg)
+
+---
+
+## Regras do Security Group
+
+![security group](Images/security-group.jpeg)
+
+---
+
+## Instância EC2 em Execução
+
+![ec2 running](Images/ec2-running.jpeg)
+
+---
+
+## Validação HTTP
+
+![http success](Images/http-success.jpeg)
 
 ---
 
