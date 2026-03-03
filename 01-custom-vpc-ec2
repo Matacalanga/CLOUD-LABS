@@ -1,0 +1,49 @@
+# Custom VPC with Public and Private Subnets + EC2 Deployment
+
+## Objective
+Create a custom VPC architecture with public and private subnets and deploy an EC2 instance in the public subnet accessible via SSH and HTTP.
+
+---
+
+## Architecture Overview
+
+- VPC CIDR: 10.0.0.0/16
+- Public Subnet: 10.0.1.0/24
+- Private Subnet: 10.0.2.0/24
+- Internet Gateway attached
+- Public Route Table (0.0.0.0/0 → IGW)
+- EC2 instance in public subnet
+- Security Group allowing SSH (22) and HTTP (80)
+
+---
+
+## Steps Performed
+
+1. Created custom VPC manually.
+2. Created public and private subnets.
+3. Enabled auto-assign public IP on public subnet.
+4. Created and attached Internet Gateway.
+5. Configured public route table.
+6. Associated route table with public subnet.
+7. Launched EC2 instance in public subnet.
+8. Configured Security Group (SSH + HTTP).
+9. Installed Apache (httpd).
+10. Validated SSH and HTTP connectivity.
+
+---
+
+## Issues Faced
+
+- Initially received "Connection Refused" error.
+- Root cause: Web server was not installed.
+- Solution: Installed and started httpd service manually.
+
+---
+
+## Key Learnings
+
+- Difference between public and private subnet.
+- Importance of route table association.
+- Security Group behavior.
+- EC2 does not serve HTTP without a running service.
+- Difference between Stop and Terminate instances.
