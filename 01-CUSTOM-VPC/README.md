@@ -28,6 +28,13 @@ This lab reinforces practical understanding of AWS networking, routing behavior,
   - HTTP (Port 80 – 0.0.0.0/0)
 
 ---
+## VPC Configuration
+
+![VPC Created](images/vpc.png)
+
+## Subnets Configuration
+
+![Subnets](images/subnets.png)
 
 ## Steps Performed
 
