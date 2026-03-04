@@ -1,8 +1,6 @@
 # AWS Troubleshooting Lab 2 – HTTP Access Failure
-
-![Architecture](Images/awstroubles.png)
 ---
-
+![diagrama](Images/awstroubles.png)
 ## 🇧🇷 Versão em Português
 
 ### 📌 Cenário
