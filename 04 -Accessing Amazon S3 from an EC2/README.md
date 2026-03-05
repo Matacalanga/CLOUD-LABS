@@ -22,7 +22,7 @@ Insert the architecture diagram here.
 
 Example:
 
-![Architecture](Images/role-policy1.jpeg)
+![Roel-policy1](Images/role-policy1.jpeg)
 
 ---
 
@@ -42,7 +42,7 @@ lab-s3-access-bucket
 Insert screenshot:
 
 ```
-/images/create-bucket.png
+/Images/role-policy2.jpeg
 ```
 
 ---
