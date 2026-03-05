@@ -22,7 +22,7 @@ Insert the architecture diagram here.
 
 Example:
 
-![Architecture](images/architecture.png)
+![Architecture](Images/role-policy1.jpeg)
 
 ---
 
