@@ -12,7 +12,7 @@ O objetivo é permitir que um usuário IAM específico tenha acesso controlado a
 
 ### 🏗 Arquitetura
 
-![Architecture](images/architecture.png)
+![Bucket](images/bucket.png)
 
 ---
 
@@ -106,7 +106,7 @@ The objective is to allow a specific IAM user to access an S3 bucket through **I
 
 ### 🏗 Architecture
 
-![Architecture](images/architecture.png)
+![Bucket](images/bucket.png)
 
 ---
 
