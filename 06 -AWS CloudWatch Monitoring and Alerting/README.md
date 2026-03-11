@@ -42,8 +42,8 @@ Tipo: t2.micro
 AMI: Amazon Linux 2023
 
 📷 Screenshot:
+![Texto Alternativo](./Images/cloudwatch1.jpeg)
 
-images/01-ec2-instance.png
 Passo 2 – Criar um Alarme no CloudWatch
 
 Acessar:
@@ -58,7 +58,7 @@ EC2
 
 📷 Screenshot:
 
-images/02-create-alarm.png
+![Texto Alternativo](./Images/cloudwatch2.jpeg)
 Passo 3 – Definir Condição do Alarme
 
 Configuração:
@@ -69,7 +69,7 @@ Period: 1 minute
 
 📷 Screenshot:
 
-images/03-metric-selection.png
+![Texto Alternativo](./Images/cloudwatch3.jpeg)
 Passo 4 – Configurar Notificação
 
 Criar um tópico no SNS e cadastrar um email para receber alertas.
@@ -87,7 +87,7 @@ yes > /dev/null &
 
 📷 Screenshot:
 
-images/04-alarm-triggered.png
+![Texto Alternativo](./Images/cloudwatch4.jpeg)
 Passo 6 – Encerrar o Teste
 
 Para parar o consumo de CPU:
@@ -111,6 +111,7 @@ Automação de alertas
 
 Observabilidade em ambientes cloud
 
+![Texto Alternativo](./Images/cloudwatch5.jpeg)
 
 
 
