@@ -1,6 +1,7 @@
 # AWS Custom VPC Lab – Public & Private Subnets + EC2 Deployment
 
-![diagrama](images/custom-vpc1.jpeg)
+![diagrama](images/custom-diagrama.jpeg)
+
 
 Hands-on AWS infrastructure lab focused on networking fundamentals, security configuration and EC2 deployment in a custom VPC environment.
 
@@ -89,6 +90,7 @@ This lab reinforces practical understanding of AWS networking, routing behavior,
 ---
 📸 screeshots
 
+![diagrama](images/custom-vpc1.jpeg)
 ![diagrama](images/custom-vpc2.jpeg)
 ![diagrama](images/custom-vpc3.jpeg)
 ![diagrama](images/custom-vpc4.jpeg)
