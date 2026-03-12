@@ -1,10 +1,10 @@
 # AWS Custom VPC Lab – Public & Private Subnets + EC2 Deployment
 
+![diagrama](Images/diagrama.png)
+
 Hands-on AWS infrastructure lab focused on networking fundamentals, security configuration and EC2 deployment in a custom VPC environment.
 
 ---
-![diagrama](Images/diagrama.png)
-
 
 # 🇺🇸 English Version
 
@@ -33,37 +33,25 @@ This lab reinforces practical understanding of AWS networking, routing behavior,
 
 ## VPC Configuration
 
-![vpc](Images/vpc.jpeg)
-
 ---
 
 ## Subnets Configuration
-
-![subnets](Images/subnets.jpeg)
 
 ---
 
 ## Route Table Configuration
 
-![route table](Images/route-table.jpeg)
-
 ---
 
 ## Security Group Rules
-
-![security group](Images/security-group.png)
 
 ---
 
 ## EC2 Instance Running
 
-![ec2 running](Images/ec2-running.jpeg)
-
 ---
 
 ## HTTP Validation
-
-![http success](Images/http-success.jpeg)
 
 ---
 
