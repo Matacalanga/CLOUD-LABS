@@ -260,5 +260,13 @@ Possíveis melhorias para este projeto:
 * Adição de domínio customizado
 * Configuração de HTTPS completo
 
+  📸 VEJA:
+  ![diagrama](images/StaticWebsite1.jpeg)
+  ![diagrama](images/diagrama.png)
+  ![diagrama](images/diagrama.png)
+  ![diagrama](images/diagrama.png)
+  ![diagrama](images/diagrama.png)
+  ![diagrama](images/diagrama.png)
+  ![diagrama](images/diagrama.png)
 
 
