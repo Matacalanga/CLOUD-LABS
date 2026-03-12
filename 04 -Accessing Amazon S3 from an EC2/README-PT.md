@@ -95,7 +95,17 @@ aws s3 ls s3://my-ec2-s3-test-bucket
 
 Se configurado corretamente, a instância EC2 conseguirá acessar o S3 sem utilizar chaves de acesso.
 
-### Screenshots
+### Estrutura do Projeto
+
+```
+### Principais Aprendizados
+
+- Uso de IAM Roles para melhorar a segurança na AWS
+- Permitir que EC2 acesse serviços AWS sem armazenar credenciais
+- Uso básico do AWS CLI com S3
+- Implementação prática do princípio do menor privilégio
+
+📸 Screenshots
 
 Arquitetura  
 ![Architecture](images/architecture.png)
@@ -108,13 +118,3 @@ IAM Role
 
 Teste EC2  
 ![EC2 Test](images/ec2-s3-test.png)
-
-### Estrutura do Projeto
-
-```
-### Principais Aprendizados
-
-- Uso de IAM Roles para melhorar a segurança na AWS
-- Permitir que EC2 acesse serviços AWS sem armazenar credenciais
-- Uso básico do AWS CLI com S3
-- Implementação prática do princípio do menor privilégio
