@@ -1,6 +1,6 @@
 # ☁️ Laboratório 07 — Deploy de Site Estático na AWS com CI/CD
 
-![diagrama](images/diagrama.png)
+![diagrama](images/diagrama1.png)
 
 ## 📌 Objetivo
 
