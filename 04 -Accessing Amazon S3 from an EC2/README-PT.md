@@ -1,5 +1,7 @@
 ## 🇧🇷 Português
 
+![Architecture](images/s3fromec2.png)
+
 ### Visão Geral do Projeto
 
 Este projeto demonstra como configurar acesso seguro entre uma instância EC2 e um bucket S3 utilizando uma IAM Role.
