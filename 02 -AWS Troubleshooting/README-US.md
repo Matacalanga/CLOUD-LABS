@@ -1,6 +1,6 @@
 ## 🇺🇸 English Version
 
-![Troubles](Images/awstroubles.png)
+![Troubles](images/awstroubles.png)
 
 ### 📌 Scenario
 A public EC2 instance running Apache was not accessible via browser.
