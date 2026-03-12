@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+         <div class="container">
+         <h1>LISTA DE TAREFAS</h1>
+         <p id="contador-tarefas"></p>
+         <button id="toggle-theme" class="toggle-theme">
+            
+
+    🌙 Modo escuro
+</button>
+
+
+         <form id="form-tarefa">
+
+        <!-- FILTROS -->
+<div class="filtros">
+    <button data-filtro="todas" class="ativo">Todas</button>
+    <button data-filtro="pendentes">Pendentes</button>
+    <button data-filtro="concluidas">Concluídas</button>
+</div>
+
+<!-- FORMULÁRIO -->
+<form id="form-tarefa">
+
+    <input 
+        type="text" 
+        id="input-tarefa" 
+        placeholder="Digite uma tarefa..." 
+        required
+    >
+
+    <button type="submit">
+        Adicionar
+    </button>
+
+</form>
+
+
+         <ul id="lista-tarefas">
+            
+            <!-- As tarefas entram aqui via JavaScript -->
+        </ul>
+
+         </div>
+
+         <script src="script.js"></script>
+         
+</body>
+</html>
