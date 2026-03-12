@@ -262,11 +262,11 @@ Possíveis melhorias para este projeto:
 
   📸 VEJA:
   ![diagrama](images/StaticWebsite1.jpeg)
-  ![diagrama](images/diagrama.png)
-  ![diagrama](images/diagrama.png)
-  ![diagrama](images/diagrama.png)
-  ![diagrama](images/diagrama.png)
-  ![diagrama](images/diagrama.png)
-  ![diagrama](images/diagrama.png)
+  ![diagrama](images/StaticWebsite2.jpeg)
+  ![diagrama](images/StaticWebsite3.jpeg)
+  ![diagrama](images/StaticWebsite4.jpeg)
+  ![diagrama](images/StaticWebsite5.jpeg)
+  ![diagrama](images/StaticWebsite6.jpeg)
+  ![diagrama](images/StaticWebsite7.jpeg)
 
 
