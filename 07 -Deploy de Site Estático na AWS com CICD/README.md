@@ -10,22 +10,6 @@ O objetivo foi aprender na prática como funciona um fluxo simples de **CI/CD pa
 
 ---
 
-# 🏗 Arquitetura da Solução
-
-O fluxo implementado foi:
-
-```
-GitHub
-   ↓
-AWS CodePipeline
-   ↓
-Amazon S3 (Static Website Hosting)
-   ↓
-Amazon CloudFront (CDN)
-   ↓
-Usuário acessa o site
-```
-
 Serviços utilizados:
 
 * Amazon S3
@@ -276,6 +260,5 @@ Possíveis melhorias para este projeto:
 * Adição de domínio customizado
 * Configuração de HTTPS completo
 
-```
-```
+
 
