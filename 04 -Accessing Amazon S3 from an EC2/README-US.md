@@ -1,5 +1,7 @@
 # AWS EC2 + S3 Access Using IAM Role
 
+![Architecture](images/s3fromec2.png)
+
 ## 🇺🇸 English
 
 ### Project Overview
