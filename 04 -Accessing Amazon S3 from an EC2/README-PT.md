@@ -111,8 +111,12 @@ Se configurado corretamente, a instância EC2 conseguirá acessar o S3 sem utili
 📸 Screenshots
  
 ![Architecture](images/role-policy1.jpeg)
+
 ![Architecture](images/role-policy2.jpeg)
+
 ![Architecture](images/role-policy3.jpeg)
+
 ![Architecture](images/role-policy4.jpeg)
+
 
 
