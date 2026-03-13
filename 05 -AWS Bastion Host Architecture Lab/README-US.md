@@ -31,8 +31,6 @@ User → Bastion Host → Private Server
 
 ## Architecture Diagram
 
-![Architecture Diagram](Images-bastion.png)
-
 ---
 
 ## AWS Services Used
