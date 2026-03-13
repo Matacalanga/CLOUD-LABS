@@ -105,7 +105,7 @@ If configured correctly, the EC2 instance will access S3 without using access ke
 
 ### Screenshots
  
-![Architecture](images/architecture.png)
+![Architecture](images/role-policy1.jpeg)
 
 
 
