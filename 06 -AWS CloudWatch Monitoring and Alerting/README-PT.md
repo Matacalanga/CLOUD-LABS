@@ -1,6 +1,6 @@
 # BR Monitoramento e Alertas com CloudWatch
 
-![cloudwatchs](./Images/cloudwatch1.jpeg)
+![cloudwatchs](./images/cloudwatcho.png)
 
 ## Visão Geral
 
@@ -70,4 +70,13 @@ O alarme muda de estado: OK → ALARM e envia uma notificação por email atrav�
 
 ## 📷 Screenshots
 
-![cloudwatchs](./Images/cloudwatch1.jpeg)
+![cloudwatchs](./images/cloudwatch1.jpeg)
+
+![cloudwatchs](./images/cloudwatch2.jpeg)
+
+![cloudwatchs](./images/cloudwatch3.jpeg)
+
+![cloudwatchs](./images/cloudwatch4.jpeg)
+
+![cloudwatchs](./images/cloudwatch5.jpeg)
+
