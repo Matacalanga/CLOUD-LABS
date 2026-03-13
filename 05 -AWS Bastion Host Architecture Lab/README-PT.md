@@ -62,7 +62,6 @@ Finalidade: Bastion Host
 CIDR: 10.0.2.0/24
 Finalidade: Servidor Interno
 ```
-
 ---
 
 ## Configuração de Segurança
@@ -103,7 +102,6 @@ AMI: Amazon Linux
 Subnet: Pública
 IP Público: Habilitado
 ```
-
 ### Servidor Privado
 
 ```
@@ -112,7 +110,6 @@ AMI: Amazon Linux
 Subnet: Privada
 IP Público: Desabilitado
 ```
-
 ---
 
 ## Fluxo de Conexão SSH
@@ -129,8 +126,6 @@ A partir do Bastion:
 
 ```
 ssh ec2-user@PRIVATE_IP
-```
-
 ---
 
 ## Cenário de Troubleshooting
@@ -152,7 +147,6 @@ Associar a **public subnet** à **public route table** contendo a rota:
 ```
 0.0.0.0/0 → Internet Gateway
 ```
-
 Após a correção, o acesso SSH funcionou normalmente.
 
 ---
