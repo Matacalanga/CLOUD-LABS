@@ -107,7 +107,10 @@ If configured correctly, the EC2 instance will access S3 without using access ke
  
 ![Architecture](images/role-policy1.jpeg)
 
+![Architecture](images/role-policy2.jpeg)
+
+![Architecture](images/role-policy3.jpeg)
+
+![Architecture](images/role-policy4.jpeg)
 
 
-
-# Acesso EC2 ao S3 Usando IAM Role
