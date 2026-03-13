@@ -1,5 +1,7 @@
 # AWS Bastion Host Architecture Lab
-🇺🇸 English |
+🇺🇸 English 
+
+![Architecture Diagram](images/bastion.png)
 
 ## Objective
 
