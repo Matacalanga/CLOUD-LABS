@@ -107,16 +107,12 @@ Se configurado corretamente, a instância EC2 conseguirá acessar o S3 sem utili
 - Uso básico do AWS CLI com S3
 - Implementação prática do princípio do menor privilégio
 
+
 📸 Screenshots
+ 
+![Architecture](images/role-policy1.jpeg)
+![Architecture](images/role-policy2.jpeg)
+![Architecture](images/role-policy3.jpeg)
+![Architecture](images/role-policy4.jpeg)
 
-Arquitetura  
-![Architecture](images/architecture.png)
 
-Bucket S3  
-![S3 Bucket](images/s3-bucket.png)
-
-IAM Role  
-![IAM Role](images/iam-role.png)
-
-Teste EC2  
-![EC2 Test](images/ec2-s3-test.png)
