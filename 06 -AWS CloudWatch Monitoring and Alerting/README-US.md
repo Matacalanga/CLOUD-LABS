@@ -1,5 +1,7 @@
 # EN Monitoring and Alerts with CloudWatch
 
+![Architecture Diagram](images/cloudwatch0.png)
+
 ## Overview
 
 This lab demonstrates how to monitor an EC2 instance using Amazon CloudWatch and automatically send alerts when resource usage exceeds a defined threshold.
@@ -68,4 +70,12 @@ The alarm changes state: OK → ALARM and sends an email notification through SN
 
 ## 📷 Screenshots
 
-![Alternative Text](./Images/cloudwatch1.jpeg)
+![cloudwatchs](./images/cloudwatch1.jpeg)
+
+![cloudwatchs](./images/cloudwatch2.jpeg)
+
+![cloudwatchs](./images/cloudwatch3.jpeg)
+
+![cloudwatchs](./images/cloudwatch4.jpeg)
+
+![cloudwatchs](./images/cloudwatch5.jpeg)
