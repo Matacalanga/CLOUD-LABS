@@ -1,6 +1,6 @@
 # BR Monitoramento e Alertas com CloudWatch
 
-![cloudwatchs](/images/cloudwatcho.png)
+![Architecture Diagram](images/cloudwatch0.png)
 
 ## Visão Geral
 
