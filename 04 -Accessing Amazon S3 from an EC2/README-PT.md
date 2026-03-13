@@ -99,7 +99,7 @@ Se configurado corretamente, a instância EC2 conseguirá acessar o S3 sem utili
 
 ### Estrutura do Projeto
 
-```
+
 ### Principais Aprendizados
 
 - Uso de IAM Roles para melhorar a segurança na AWS
