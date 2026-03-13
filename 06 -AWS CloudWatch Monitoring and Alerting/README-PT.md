@@ -1,5 +1,7 @@
 # BR Monitoramento e Alertas com CloudWatch
 
+![cloudwatchs](./Images/cloudwatch1.jpeg)
+
 ## Visão Geral
 
 Este laboratório demonstra como monitorar uma instância EC2 utilizando Amazon CloudWatch e enviar alertas automaticamente quando o uso de recursos ultrapassa um limite definido.
