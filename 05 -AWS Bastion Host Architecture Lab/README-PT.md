@@ -2,7 +2,7 @@
 
 🇧🇷 Português
 
-![Architecture Diagram](images-bastion.png)
+![Architecture Diagram](images/bastion.png)
 ---
 
 ## Objetivo
