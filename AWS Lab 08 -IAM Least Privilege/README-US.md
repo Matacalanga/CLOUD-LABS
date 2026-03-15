@@ -1,5 +1,7 @@
 # Laboratório 08 — IAM Least Privilege na AWS
 
+![diagrama](images/iam-last0.jpeg)
+
 Este laboratório teve como objetivo demonstrar na prática o princípio de **Privilégio Mínimo (Least Privilege)** utilizando os serviços de identidade e armazenamento da **Amazon Web Services (AWS)**.
 
 O princípio de **Least Privilege** é uma das principais boas práticas de segurança em ambientes de computação em nuvem. Ele consiste em conceder a usuários, aplicações ou serviços **somente as permissões estritamente necessárias para executar suas tarefas**, reduzindo riscos de acesso indevido ou alterações não autorizadas em recursos da infraestrutura.
@@ -74,3 +76,10 @@ Durante este laboratório foram aplicados os seguintes conceitos fundamentais da
 
 O fluxo de autorização configurado segue o modelo abaixo:
 
+📸 Screenshots
+
+![diagrama](images/iam-last1.jpeg)
+![diagrama](images/iam-last2.jpeg)
+![diagrama](images/iam-last3.jpeg)
+![diagrama](images/iam-last4.jpeg)
+![diagrama](images/iam-last5.jpeg)
