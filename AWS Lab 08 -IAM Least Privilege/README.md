@@ -60,3 +60,13 @@ Durante este laboratório foram aplicados os seguintes conceitos fundamentais da
 
 O fluxo de autorização implementado segue o modelo:
 
+![diagrama](images/iam-last1.jpeg)
+
+![diagrama](images/iam-last2.jpeg)
+
+![diagrama](images/iam-last3.jpeg)
+
+![diagrama](images/iam-last3.jpeg)
+
+![diagrama](images/iam-last4.jpeg)
+
