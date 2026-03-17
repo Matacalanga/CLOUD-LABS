@@ -31,8 +31,11 @@ Simular um fluxo de deploy em ambiente de produção, incluindo:
 ---
 
 ## 📸screenshots
-![Architecture Diagram](images/production-simulation1.png)
-![Architecture Diagram](images/production-simulation2.png)
-![Architecture Diagram](images/production-simulation3.png)
-![Architecture Diagram](images/production-simulation4.png)
+![Architecture Diagram](images/production-simulation1.jpeg)
+
+![Architecture Diagram](images/production-simulation2.jpeg)
+
+![Architecture Diagram](images/production-simulation3.jpeg)
+
+![Architecture Diagram](images/production-simulation4.jpeg)
 
