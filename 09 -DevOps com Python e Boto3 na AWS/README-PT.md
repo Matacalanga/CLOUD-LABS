@@ -1,6 +1,6 @@
 # 🚀 Lab 09 — DevOps com Python e Boto3 na AWS
 
-![diagrama](images/phytonboto.png)
+![diagrama](images/pythonboto.png)
 
 Este laboratório demonstra, na prática, como automatizar tarefas na AWS utilizando Python e o SDK Boto3, seguindo princípios de DevOps e Infrastructure as Code (IaC).
 
@@ -198,8 +198,8 @@ E opcionalmente deletar o bucket via console AWS.
 ---
 
 ## 📸 screenshots
-![diagrama](images/phytonboto1.jpeg)
-![diagrama](images/phytonboto2.jpeg)
-![diagrama](images/phytonboto3.jpeg)
-![diagrama](images/phytonboto4.jpeg)
-![diagrama](images/phytonboto5.jpeg)
+![diagrama](images/pythonboto1.jpeg)
+![diagrama](images/pythonboto2.jpeg)
+![diagrama](images/pythonboto3.jpeg)
+![diagrama](images/pythonboto4.jpeg)
+![diagrama](images/pythonboto5.jpeg)
