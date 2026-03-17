@@ -1,6 +1,6 @@
 # 🚀 Lab 10 — Simulação de Produção com AWS (EC2 + S3 + IAM)
 
-![Architecture Diagram](images/lab10-diagrama.png)
+![Architecture Diagram](images/production-simulation.png)
 
 Este laboratório simula um ambiente real de produção na AWS, utilizando uma instância EC2, armazenamento de artefatos no S3 e autenticação segura via IAM Role, seguindo práticas modernas de DevOps.
 
@@ -30,5 +30,9 @@ Simular um fluxo de deploy em ambiente de produção, incluindo:
 
 ---
 
-## 🏗️ Arquitetura do Laboratório
+## 📸screenshots
+![Architecture Diagram](images/production-simulation1.png)
+![Architecture Diagram](images/production-simulation2.png)
+![Architecture Diagram](images/production-simulation3.png)
+![Architecture Diagram](images/production-simulation4.png)
 
