@@ -1,5 +1,7 @@
 # ☁️ Laboratório 07 — Deploy de Site Estático na AWS com CI/CD
 
+```
+
 GitHub (push)
      │
      ▼
@@ -16,6 +18,8 @@ CloudFront (OAC)
      │
      ▼
 User (HTTPS)
+
+```
 
 ☁️ Deploy de Site Estático com CI/CD na AWS
 📖 Visão Geral
