@@ -1,70 +1,243 @@
 # AWS Lab 08 — IAM Least Privilege
 
-![diagrama](images/iam-last0.jpeg)
+---
 
-Este laboratório teve como objetivo praticar e demonstrar na prática o princípio de **Least Privilege (Privilégio Mínimo)** utilizando os serviços de identidade e armazenamento da **AWS**.
+## 🇧🇷 VERSÃO EM PORTUGUÊS
 
-O princípio de **Least Privilege** é um dos fundamentos de segurança em cloud computing e consiste em conceder a um usuário, aplicação ou serviço **apenas as permissões estritamente necessárias para executar sua função**, evitando acessos excessivos que possam aumentar riscos de segurança.
+---
 
-Durante o laboratório foi utilizado o serviço **AWS Identity and Access Management (IAM)** para controlar permissões e o **Amazon S3** como recurso alvo para teste de acesso.
+## 📐 DIAGRAMA DE AUTORIZAÇÃO
 
-## Objetivo do laboratório
+```
+[IAM User]
+     |
+     | Request (S3 Action)
+     ↓
+[IAM Policy Evaluation]
+     |
+   ✅ Allow / ❌ Deny
+     ↓
+[Amazon S3]
+```
 
-Configurar um usuário com permissões restritas para acessar o serviço de armazenamento da AWS, permitindo apenas operações específicas e bloqueando ações administrativas ou potencialmente destrutivas.
+---
 
-## Etapas realizadas
+## 📌 OBJETIVO
 
-Inicialmente foi realizado o login no console da AWS utilizando um usuário de laboratório. Após o acesso, foi validado que o usuário **não possuía permissões para acessar o serviço Amazon S3**, resultando em erro de **Access Denied**, o que demonstra o comportamento padrão de segurança da AWS quando nenhuma política de acesso está associada ao usuário.
+Demonstrar na prática o princípio de **Least Privilege**, concedendo a um usuário apenas as permissões mínimas necessárias para visualizar recursos no Amazon S3.
 
-Em seguida foi acessado o serviço **IAM (Identity and Access Management)** para criação de uma política personalizada.
+---
 
-Foi criada uma **IAM Policy** utilizando o editor JSON com permissões mínimas necessárias para permitir apenas a visualização de buckets no Amazon S3. A política criada concedeu permissão para as ações:
+## 🧠 CONCEITO DE LEAST PRIVILEGE
 
-- `s3:ListAllMyBuckets`
-- `s3:GetBucketLocation`
+O princípio de menor privilégio consiste em:
 
-Essas ações permitem apenas listar os buckets existentes e verificar sua localização, sem permitir qualquer operação de criação, modificação ou exclusão.
+* Conceder apenas permissões necessárias
+* Evitar acesso excessivo
+* Reduzir riscos de segurança
 
-Após a criação da policy, ela foi associada ao usuário **s3-support**, demonstrando como políticas podem ser aplicadas diretamente a identidades dentro da AWS.
+Na AWS, isso significa limitar:
 
-## Validação das permissões
+* Ações (`Action`)
+* Recursos (`Resource`)
 
-Após anexar a política ao usuário, foram realizados testes de acesso no serviço Amazon S3 para validar o comportamento das permissões configuradas.
+---
 
-Os seguintes resultados foram observados:
+## ⚙️ RECURSOS UTILIZADOS
+
+* AWS IAM
+* Amazon S3
+* IAM Policies
+
+---
+
+## 👤 USUÁRIO
+
+```
+s3-support
+```
+
+---
+
+## 🔎 ESTADO INICIAL
+
+Sem nenhuma policy associada:
+
+* ❌ Acesso ao S3 negado
+* Erro: `AccessDenied`
+
+---
+
+## 🔐 POLICY IMPLEMENTADA
+
+### Permissões concedidas:
+
+* `s3:ListAllMyBuckets`
+* `s3:GetBucketLocation`
+
+---
+
+## 🧾 EXEMPLO DE POLICY
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+---
+
+## ⚠️ IMPORTANTE
+
+Essas permissões são **globais**, pois utilizam:
+
+```
+Resource: *
+```
+
+Isso permite apenas visualizar buckets, sem acesso ao conteúdo interno.
+
+---
+
+## 🔄 FLUXO DE AUTORIZAÇÃO
+
+1. Usuário realiza requisição ao S3
+2. IAM avalia as policies associadas
+3. A ação é permitida ou negada
+4. O S3 responde conforme a decisão
+
+---
+
+## 📤 VALIDAÇÃO
 
 Permissões permitidas:
-- Visualizar a lista de buckets
-- Consultar informações básicas de buckets
+
+* Listar buckets
+* Consultar localização
 
 Permissões bloqueadas:
-- Criar buckets
-- Enviar arquivos
-- Excluir objetos
-- Alterar configurações de buckets
 
-Esses testes confirmaram que o usuário possui apenas **permissões de leitura estrutural**, garantindo conformidade com o princípio de **Least Privilege**.
+* Criar buckets
+* Upload de arquivos
+* Deletar objetos
+* Alterar configurações
 
-## Conceitos praticados
+---
 
-Durante este laboratório foram aplicados os seguintes conceitos fundamentais da AWS:
+## 🧠 MELHORIA (LEAST PRIVILEGE REAL)
 
-- AWS IAM (Identity and Access Management)
-- Criação de políticas de acesso (IAM Policies)
-- Uso de permissões baseadas em JSON
-- Controle de acesso a serviços da AWS
-- Princípio de segurança Least Privilege
-- Validação de permissões utilizando testes práticos
+Exemplo mais restrito:
 
-## Arquitetura do laboratório
+```json
+{
+  "Effect": "Allow",
+  "Action": "s3:ListBucket",
+  "Resource": "arn:aws:s3:::meu-bucket"
+}
+```
 
-O fluxo de autorização implementado segue o modelo:
+👉 Aqui o acesso é limitado a **um bucket específico**
+
+---
+
+## 📚 APRENDIZADOS
+
+* IAM avalia permissões antes de permitir acesso
+* Least Privilege envolve ação + recurso
+* Diferença entre permissões globais e específicas
+* Uso de policies em JSON
+
+---
+
+## ⚠️ BOAS PRÁTICAS
+
+* Evitar `Resource: *` quando possível
+* Restringir permissões por bucket
+* Revisar policies regularmente
+
+---
+
+## 🌍 ENGLISH VERSION
+
+---
+
+## 📐 AUTHORIZATION FLOW
+
+```
+[IAM User]
+     |
+     | Request (S3 Action)
+     ↓
+[IAM Policy Evaluation]
+     |
+   ✅ Allow / ❌ Deny
+     ↓
+[Amazon S3]
+```
+
+---
+
+## 📌 OBJECTIVE
+
+Demonstrate the **Principle of Least Privilege** by granting minimal permissions to an IAM user for accessing Amazon S3.
+
+---
+
+## 🧠 LEAST PRIVILEGE CONCEPT
+
+Least Privilege means:
+
+* Grant only required permissions
+* Avoid excessive access
+* Reduce security risks
+
+---
+
+## 🔐 POLICY
+
+```json
+{
+  "Effect": "Allow",
+  "Action": [
+    "s3:ListAllMyBuckets",
+    "s3:GetBucketLocation"
+  ],
+  "Resource": "*"
+}
+```
+
+---
+
+## ⚠️ NOTE
+
+This policy uses global access (`*`) and only allows bucket listing.
+
+---
+
+## 📚 LEARNINGS
+
+* IAM evaluates permissions before access
+* Least Privilege = action + resource restriction
+* Difference between global and scoped permissions
+
+---
+
+
+### 📸 ScreenShots
 
 ![diagrama](images/iam-last1.jpeg)
 
 ![diagrama](images/iam-last2.jpeg)
-
-![diagrama](images/iam-last3.jpeg)
 
 ![diagrama](images/iam-last3.jpeg)
 
