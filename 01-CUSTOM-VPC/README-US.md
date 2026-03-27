@@ -1,98 +1,129 @@
-# AWS Custom VPC Lab – Public & Private Subnets + EC2 Deployment
+🇺🇸 ENGLISH VERSION
+📐 ARCHITECTURE DIAGRAM
+       Internet
+          |
+  [Internet Gateway]
+          |
+-------------------------
+|        VPC            |
+|    10.0.0.0/16       |
+|                      |
+|  Public Subnet       |
+|  10.0.1.0/24         |
+|    |                 |
+| [EC2 Public]         |
+|    |                 |
+| Route Table:         |
+| 0.0.0.0/0 → IGW      |
+|                      |
+|----------------------|
+|  Private Subnet      |
+|  10.0.2.0/24         |
+|    |                 |
+| [EC2 Private]        |
+|    |                 |
+| Route Table:         |
+| (no internet)        |
+-------------------------
+🎯 OBJECTIVE
+Create a VPC with network segmentation
 
-![diagrama](images/custom-diagrama.png)
+Implement public and private subnets
 
+Configure internet access via Internet Gateway
 
-Hands-on AWS infrastructure lab focused on networking fundamentals, security configuration and EC2 deployment in a custom VPC environment.
+Demonstrate resource isolation
 
----
-
-# 🇺🇸 English Version
-
-## Objective
-
-Design and deploy a custom AWS VPC architecture with public and private subnets, configure internet connectivity, and launch an EC2 instance accessible via SSH and HTTP.
+Design and deploy a custom VPC architecture on AWS containing public and private subnets, configure internet connectivity, and launch an EC2 instance accessible via SSH and HTTP.
 
 This lab reinforces practical understanding of AWS networking, routing behavior, and security controls.
 
----
+🧠 ARCHITECTURE OVERVIEW
+This lab demonstrates the creation of a custom VPC on AWS, including public and private subnets, with the goal of understanding network isolation and access control.
 
-## Architecture Overview
+The VPC was created with the CIDR block 10.0.0.0/16, allowing for future expansion.
 
-- VPC CIDR: 10.0.0.0/16
-- Public Subnet: 10.0.1.0/24
-- Private Subnet: 10.0.2.0/24
-- Internet Gateway attached to VPC
-- Public Route Table with route:
-  - 0.0.0.0/0 → Internet Gateway
-- EC2 instance deployed in public subnet
-- Security Group allowing:
-  - SSH (Port 22 – restricted to My IP)
-  - HTTP (Port 80 – 0.0.0.0/0)
+The public subnet (10.0.1.0/24) has internet access via an Internet Gateway.
 
----
+The private subnet (10.0.2.0/24) does not have direct internet access, ensuring isolation.
 
-## VPC Configuration
+Routes were configured separately for each subnet.
 
----
+🌐 COMMUNICATION FLOW
+Resources in the public subnet access the internet through the Internet Gateway.
 
-## Subnets Configuration
+Resources in the private subnet do not have direct internet access.
 
----
+Communication between subnets occurs internally via the VPC network.
 
-## Route Table Configuration
+🔐 SECURITY
+Private subnet isolated from the internet
 
----
+Traffic control via route tables
 
-## Security Group Rules
+Use of segmented architecture to reduce the attack surface
 
----
+💰 COSTS
+This lab uses resources within the Free Tier (VPC, subnets, and route tables).
 
-## EC2 Instance Running
+There are no significant additional costs, unless EC2 instances are added.
 
----
+⚠️ LIMITATIONS
+The private subnet does not have internet access (no NAT Gateway).
 
-## HTTP Validation
+This environment is not suitable for applications that require external access.
 
----
+🖥️ RUNNING EC2 INSTANCE
+🌍 HTTP VALIDATION
+⚙️ STEPS EXECUTED
+Manual creation of custom VPC
 
-## Steps Performed
+Definition of public and private subnets
 
-1. Created a custom VPC manually.
-2. Defined public and private subnets.
-3. Enabled auto-assign public IP for the public subnet.
-4. Created and attached an Internet Gateway.
-5. Configured a public route table with default route to IGW.
-6. Associated route table with public subnet.
-7. Launched Amazon Linux EC2 instance.
-8. Configured Security Group rules (SSH + HTTP).
-9. Installed Apache (httpd) manually.
-10. Validated connectivity via SSH and browser.
+Enabling automatic public IP in the public subnet
 
----
+Creation and association of the Internet Gateway
 
-## Issues Faced
+Configuration of the public route table
 
-- Initial HTTP access returned "Connection Refused".
-- Root cause: Web server service was not installed or running.
-- Resolution: Installed and enabled Apache using systemctl.
+Association of the route table to the public subnet
 
----
+Creation of an Amazon Linux EC2 instance
 
-## Key Technical Learnings
+Configuration of Security Group rules
 
-- Public subnet requires both IGW and route table association.
-- Security Groups act as stateful firewalls.
-- EC2 instances do not serve HTTP without an active application.
-- Difference between stopping and terminating an EC2 instance.
-- Practical understanding of AWS networking flow.
+Manual installation of the Apache server (httpd)
 
----
-📸 screeshots
+Validation of connectivity via SSH and browser
+
+🛠️ PROBLEMS ENCONTERED
+"Connection Refused" error when accessing via browser
+
+Cause: web service was not installed or active
+
+Solution: installation and enablement of Apache via systemctl
+
+📚 TECHNICAL LEARNINGS
+Public subnet requires IGW and correct route association
+
+Security Groups function as a stateful firewall
+
+EC2 instances do not respond to HTTP without an active application
+
+Practical difference between Stop and Terminate
+
+Understanding of network flow within AWS
+
+📸 ScreeShots
 
 ![diagrama](images/custom-vpc1.jpeg)
+
 ![diagrama](images/custom-vpc2.jpeg)
+
 ![diagrama](images/custom-vpc3.jpeg)
+
 ![diagrama](images/custom-vpc4.jpeg)
+
 ![diagrama](images/custom-vpc5.jpeg)
+
 ![diagrama](images/custom-vpc6.jpeg)
