@@ -1,184 +1,170 @@
-# Laboratório de Arquitetura Bastion Host na AWS
-
-🇧🇷 Português
-
-![Architecture Diagram](images/bastion.png)
----
-
-## Objetivo
-
-Este laboratório demonstra um padrão de arquitetura segura utilizando um **Bastion Host** para acessar recursos localizados em uma **subnet privada** dentro de uma VPC na AWS.
-
-O objetivo é simular um ambiente comum de produção onde servidores internos **não podem ser acessados diretamente pela internet**, garantindo controle e segurança no acesso administrativo.
+# AWS Lab — Bastion Host Architecture
 
 ---
 
-## Visão Geral da Arquitetura
-
-O ambiente consiste em:
-
-* Uma **VPC personalizada**
-* Uma **Subnet Pública**
-* Uma **Subnet Privada**
-* Um **Bastion Host (EC2)** na subnet pública
-* Uma **instância EC2 privada** na subnet privada
-* **Security Groups** controlando acesso SSH
-* **Internet Gateway** permitindo acesso público ao Bastion
-
-Fluxo de acesso:
-
-Usuário → Bastion Host → Servidor Privado
+## 🇧🇷 VERSÃO EM PORTUGUÊS
 
 ---
 
-## Serviços AWS Utilizados
+## 📐 DIAGRAMA DE ARQUITETURA
 
-* Amazon VPC
-* Amazon EC2
+```
+User (Admin)
+     |
+     | SSH (22)
+     ↓
+Internet
+     |
+[Internet Gateway]
+     |
+-----------------------------
+|          VPC              |
+|     10.0.0.0/16          |
+|                          |
+|  Public Subnet           |
+|  10.0.1.0/24             |
+|     |                    |
+|  [Bastion Host]          |
+|     | SSH                |
+|--------------------------|
+|  Private Subnet          |
+|  10.0.2.0/24             |
+|     |                    |
+|  [Private EC2]           |
+|                          |
+|  (No Internet Access)    |
+-----------------------------
+```
+
+---
+
+## 📌 OBJETIVO
+
+Demonstrar uma arquitetura segura utilizando um **Bastion Host** para acessar recursos em uma subnet privada, evitando exposição direta à internet.
+
+---
+
+## 🧠 VISÃO GERAL
+
+Esta arquitetura simula um ambiente de produção onde servidores internos não possuem IP público e só podem ser acessados através de um ponto de entrada controlado.
+
+---
+
+## 🏗️ ARQUITETURA
+
+Componentes:
+
+* VPC customizada
+* Subnet pública (Bastion Host)
+* Subnet privada (servidor interno)
 * Internet Gateway
-* Route Tables
 * Security Groups
 
 ---
 
-## Configuração de Rede
+## 🔐 SEGURANÇA
+
+* Instâncias privadas sem IP público
+* Acesso SSH restrito ao Bastion
+* Bastion acessível apenas via IP confiável
+* Redução da superfície de ataque
+
+---
+
+## ⚠️ SOBRE CONECTIVIDADE
+
+A subnet privada **não possui NAT Gateway**, portanto:
+
+* ❌ Sem acesso à internet
+* ✔️ Apenas comunicação interna
+
+---
+
+## 🔄 FLUXO DE ACESSO
+
+1. Usuário conecta via SSH no Bastion Host
+2. Bastion acessa a instância privada via rede interna
+3. A instância privada nunca é exposta diretamente à internet
+
+---
+
+## ⚙️ CONFIGURAÇÃO DE REDE
 
 ### VPC
 
 ```
-CIDR: 10.0.0.0/16
+10.0.0.0/16
 ```
 
 ### Subnet Pública
 
 ```
-CIDR: 10.0.1.0/24
-Finalidade: Bastion Host
+10.0.1.0/24
 ```
 
 ### Subnet Privada
 
 ```
-CIDR: 10.0.2.0/24
-Finalidade: Servidor Interno
+10.0.2.0/24
 ```
----
-
-## Configuração de Segurança
-
-### Security Group do Bastion
-
-Regras de entrada:
-
-```
-SSH (Porta 22)
-Origem: Meu IP público
-```
-
-Isso garante que **apenas o computador do administrador possa acessar o Bastion Host**.
 
 ---
 
-### Security Group da Instância Privada
+## 🔐 SECURITY GROUPS
 
-Regras de entrada:
+### Bastion
 
-```
-SSH (Porta 22)
-Origem: Security Group do Bastion
-```
+* SSH (22) permitido apenas do IP do administrador
 
-Isso impede acesso direto da internet e permite acesso apenas através do Bastion.
+### Instância Privada
+
+* SSH permitido apenas do Security Group do Bastion
 
 ---
 
-## Configuração das Instâncias
+## 💻 CONEXÃO SSH
 
-### Bastion Host
+### Passo 1 — Bastion
 
-```
-Tipo: t2.micro
-AMI: Amazon Linux
-Subnet: Pública
-IP Público: Habilitado
-```
-### Servidor Privado
-
-```
-Tipo: t2.micro
-AMI: Amazon Linux
-Subnet: Privada
-IP Público: Desabilitado
-```
----
-
-## Fluxo de Conexão SSH
-
-### Passo 1 — Conectar no Bastion
-
-```
+```bash
 ssh -i lab-key.pem ec2-user@BASTION_PUBLIC_IP
 ```
 
-### Passo 2 — Acessar a Instância Privada
+### Passo 2 — Private EC2
 
-A partir do Bastion:
-
-```
+```bash
 ssh ec2-user@PRIVATE_IP
+```
+
 ---
 
-## Cenário de Troubleshooting
-
-Durante a implementação inicial, a conexão SSH com o Bastion falhou devido a um problema de roteamento na rede.
+## 🛠️ TROUBLESHOOTING
 
 ### Problema
 
-Timeout ao tentar conectar via SSH no Bastion Host.
+Timeout ao conectar via SSH no Bastion
 
 ### Causa Raiz
 
-A **subnet pública não estava associada à route table pública**, impedindo que o tráfego chegasse à instância através do Internet Gateway.
+Subnet pública não associada à route table correta
 
 ### Solução
 
-Associar a **public subnet** à **public route table** contendo a rota:
+Associar subnet à route table com:
 
 ```
 0.0.0.0/0 → Internet Gateway
 ```
-Após a correção, o acesso SSH funcionou normalmente.
 
 ---
 
-## Considerações de Segurança
+## 📚 APRENDIZADOS
 
-* Instâncias privadas não possuem IP público
-* Acesso SSH restrito a um IP confiável
-* Comunicação interna controlada por Security Groups
-
-Essa arquitetura reduz a superfície de ataque e segue **boas práticas de segurança da AWS**.
-
----
-
-## Considerações de Custo
-
-Este laboratório foi projetado utilizando recursos elegíveis ao **AWS Free Tier**:
-
-* Instâncias EC2 t2.micro
-* Componentes de rede da VPC
-
-Para evitar custos inesperados, recomenda-se **parar as instâncias quando não estiverem em uso**.
-
----
-
-## Resultados de Aprendizado
-
-Após completar este laboratório foram praticados os seguintes conceitos:
-
-* Design de rede em VPC
-* Segmentação de subnets
 * Arquitetura Bastion Host
-* Acesso seguro via SSH
-* Configuração de Route Tables
+* Segmentação de rede
+* Uso de Security Groups para controle de acesso
 * Troubleshooting de conectividade
+* Importância de route tables
+
+---
+### 📸 ScreenShots
