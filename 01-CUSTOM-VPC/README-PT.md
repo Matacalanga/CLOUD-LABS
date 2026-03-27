@@ -31,7 +31,7 @@
 -------------------------
 ´´´
 
-## OBJETIVO
+### OBJETIVO
 
 Criar uma VPC com segmentação de rede
 Implementar subnet pública e privada
