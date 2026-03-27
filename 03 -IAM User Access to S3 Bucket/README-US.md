@@ -1,29 +1,42 @@
-# 🇺🇸 English
-
-## 📌 Description
-
-This lab demonstrates how to configure **controlled access to an Amazon S3 bucket using AWS IAM**.
-
-The objective is to allow a specific IAM user to access an S3 bucket through **IAM policies**, following the **Principle of Least Privilege**.
+## 🌍 ENGLISH VERSION
 
 ---
 
-### 🏗 Architecture
+## 📐 ACCESS FLOW DIAGRAM
 
-![Bucket](images/bucket.png)
+```
+[IAM User]
+     |
+     |  Request (S3 Action)
+     ↓
+     [IAM Policy Evaluation]
+            |
+      ✅ Allow / ❌ Deny
+            |
+            ↓
+        [S3 Bucket]
+```
 
 ---
 
-### ⚙️ Technologies Used
+## 📌 DESCRIPTION
+
+This lab demonstrates how to configure access control to Amazon S3 using AWS IAM.
+
+The goal is to allow a specific IAM user to access an S3 bucket using permission policies, following the **Principle of Least Privilege**.
+
+---
+
+## ⚙️ RESOURCES USED
 
 * AWS IAM
 * Amazon S3
 * IAM Policies
-* AWS Management Console
+* AWS Console
 
 ---
 
-### 👤 IAM User Created
+## 👤 IAM USER
 
 ```
 lab-user-s3
@@ -31,7 +44,7 @@ lab-user-s3
 
 ---
 
-### 🪣 S3 Bucket Created
+## 🪣 S3 BUCKET
 
 ```
 lab-iam-s3-access-ti
@@ -39,51 +52,67 @@ lab-iam-s3-access-ti
 
 ---
 
-### 🔐 Permissions Configured
+## 🔐 PERMISSIONS CONFIGURED
 
-Custom policy allowing:
+Custom policy allowing only:
 
 * `s3:ListBucket`
 * `s3:GetObject`
 * `s3:PutObject`
 
-The **DeleteObject permission was intentionally not granted** to enforce security.
+The `DeleteObject` action is intentionally **not allowed** to enforce security.
 
 ---
 
-### 🔄 Access Flow
+## 🧾 POLICY EXAMPLE
 
-1. IAM User logs into AWS
-2. IAM evaluates the attached policy
-3. User accesses the S3 bucket
-4. Allowed operations:
-
-   * List objects
-   * Upload files
-   * Download files
-
-Blocked operation:
-
-* Delete objects from the bucket
-
----
-
-### 📤 Test Performed
-
-Upload of a `.txt` file to the bucket using the configured IAM user.
-
-Expected result:
-
-✅ Upload allowed
-❌ Delete blocked
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::lab-iam-s3-access-ti"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "arn:aws:s3:::lab-iam-s3-access-ti/*"
+    }
+  ]
+}
+```
 
 ---
 
-### 🎯 Lab Objective
+## 🌐 ACCESS FLOW
 
-Demonstrate in practice:
+1. IAM user logs into AWS
+2. A request is made to access S3
+3. IAM evaluates attached policies
+4. Request is allowed or denied
+5. S3 responds accordingly
 
-* IAM user creation
-* Custom policy configuration
-* S3 access control
-* Implementation of the **Least Privilege Principle**
+---
+
+## 📚 TECHNICAL LEARNINGS
+
+* IAM evaluates permissions before granting access
+* Permissions must be scoped by action and resource
+* Difference between bucket-level and object-level permissions
+* Practical implementation of Least Privilege
+
+---
+
+## ⚠️ BEST PRACTICES
+
+* Avoid overly broad permissions (`*`)
+* Define specific actions
+* Restrict access to minimum required
+* Regularly review policies
+
+---
+📸 ScreenShot
+
+![Bucket](images/bucket.png)
