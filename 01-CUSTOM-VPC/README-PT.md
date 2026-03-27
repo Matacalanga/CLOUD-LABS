@@ -1,5 +1,9 @@
 # 🇧🇷 VERSÃO EM PORTUGUÊS
 
+
+### DIAGRAMA DE ARQUITETURA
+
+```
        Internet
           |
   [Internet Gateway]
@@ -10,7 +14,7 @@
 |                      |
 |  Public Subnet       |
 |  10.0.1.0/24         |
-|   |                  |
+|    |                 |
 | [EC2 Public]         |
 |   |                  |
 | Route Table:         |
@@ -25,6 +29,7 @@
 | Route Table:         |
 | (sem internet)       |
 -------------------------
+´´´
 
 ## OBJETIVO
 
