@@ -1,72 +1,53 @@
 # EN Monitoring and Alerts with CloudWatch
 
-![Architecture Diagram](images/cloudwatch0.png)
+📖 Overview
 
-## Overview
+This lab demonstrates how to implement infrastructure monitoring on AWS using Amazon CloudWatch, with automated alerting via Amazon SNS.
 
-This lab demonstrates how to monitor an EC2 instance using Amazon CloudWatch and automatically send alerts when resource usage exceeds a defined threshold.
+The goal is to simulate a real-world operational scenario where EC2 metrics are continuously monitored and alerts are triggered when abnormal behavior is detected.
 
-The objective is to simulate a real operational scenario where infrastructure monitoring detects problems and notifies the responsible team.
+🏗️ Architecture
+EC2 → CloudWatch Metrics → CloudWatch Alarm → SNS → Email
+🎯 Objective
 
----
+Trigger an alert when:
 
-## Architecture
+CPUUtilization > 70%
+for 2 consecutive periods (1 minute each)
+⚙️ Implementation Steps
+Launch EC2 (Amazon Linux 2023)
+Create CloudWatch Alarm
+Configure SNS Topic + Email subscription
+Generate CPU load
+Validate alarm trigger
+📊 Result
+Alarm state changes: OK → ALARM
+Notification sent via SNS
+🚨 Best Practices
+Avoid relying on CPU alone
+Use IAM Roles instead of static credentials
+Restrict SSH access
+Use multiple monitoring signals
+🔒 Production Considerations
+Auto Scaling integration
+CloudWatch Dashboards
+Custom metrics via CloudWatch Agent
+Lambda-based remediation
+📌 VEREDITO FINAL (SECO E HONESTO)
 
-EC2 Instance → CloudWatch Metrics → CloudWatch Alarm → SNS Topic → Email Notification
+Seu lab atual:
 
----
+🟡 Intermediário básico (bom para estudo)
 
-## Services used
+Após correção:
 
-- Amazon EC2
-- Amazon CloudWatch
-- Amazon Simple Notification Service (SNS)
+🟢 Pronto para portfólio (nível júnior competitivo)
 
----
+Se quiser evoluir ainda mais (nível que quase ninguém faz), o próximo passo seria:
 
-## Objective
-
-Configure an alarm that triggers when: CPUUtilization > 70% for 2 consecutive minutes. This simulates a server with abnormal CPU usage.
-
----
-
-## Step by Step
-
-**Step 1 – Create an EC2 instance**  
-Create a test instance using: Type: t2.micro / AMI: Amazon Linux 2023
-
-**Step 2 – Create a CloudWatch Alarm**  
-Access: CloudWatch → Alarms → Create Alarm  
-Select the metric: EC2 → Per-Instance Metrics → CPUUtilization
-
-**Step 3 – Define Alarm Condition**  
-Configuration: CPUUtilization > 70% / Evaluation periods: 2 / Period: 1 minute
-
-**Step 4 – Configure Notification**  
-Create an SNS topic and register an email to receive alerts.
-
-**Step 5 – Generate CPU Load**  
-Connect via SSH to the instance and run: yes > /dev/null & (run 3 times)
-
-**Step 6 – End the Test**  
-To stop CPU consumption: killall yes
-
----
-
-## Result
-
-The alarm changes state: OK → ALARM and sends an email notification through SNS.
-
----
-
-## Skills Demonstrated
-
-- Infrastructure monitoring
-- Alarm creation
-- Alert automation
-- Observability in cloud environments
-
----
+CloudWatch + Auto Scaling
+CloudWatch + Lambda (auto-remediation)
+CloudWatch + Logs + Insights
 
 ## 📷 Screenshots
 
