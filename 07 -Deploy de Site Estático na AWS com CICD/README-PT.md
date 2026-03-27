@@ -1,27 +1,7 @@
 # ☁️ Laboratório 07 — Deploy de Site Estático na AWS com CI/CD
 
-```
 
-GitHub (push)
-     │
-     ▼
-CodePipeline
-     │
-     ▼
-CodeBuild (opcional)
-     │
-     ▼
-S3 (private bucket)
-     │
-     ▼
-CloudFront (OAC)
-     │
-     ▼
-User (HTTPS)
-
-```
-
-☁️ Deploy de Site Estático com CI/CD na AWS
+### ☁️ Deploy de Site Estático com CI/CD na AWS
 📖 Visão Geral
 
 Este laboratório demonstra a implementação de um pipeline de CI/CD para aplicações frontend estáticas utilizando serviços da AWS.
