@@ -101,3 +101,15 @@ CI/CD implementation on AWS
 GitHub integration
 Secure static website hosting
 Cloud architecture best practices
+
+
+  ### 📸 ScreenShots
+  ![diagrama](images/StaticWebsite1.jpeg)
+  
+  ![diagrama](images/StaticWebsite2.jpeg)
+  
+  ![diagrama](images/StaticWebsite3.jpeg)
+  
+  ![diagrama](images/StaticWebsite4.jpeg)
+  
+  ![diagrama](images/StaticWebsite5.jpeg)
