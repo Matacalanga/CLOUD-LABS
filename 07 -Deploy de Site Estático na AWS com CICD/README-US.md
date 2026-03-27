@@ -1,4 +1,4 @@
-##Lab 07 — Deploying a Static Site on AWS with CI/CD##
+## **Lab 07 — Deploying a Static Site on AWS with CI/CD**
 
 
 ### ☁️ Static Website Deployment with CI/CD on AWS
