@@ -62,6 +62,7 @@ Use restricted policies instead of broad managed ones.
 
 ---
 
+
 ### 📸 Screenshots
  
 ![Architecture](images/role-policy1.jpeg)
@@ -71,5 +72,3 @@ Use restricted policies instead of broad managed ones.
 ![Architecture](images/role-policy3.jpeg)
 
 ![Architecture](images/role-policy4.jpeg)
-
-
