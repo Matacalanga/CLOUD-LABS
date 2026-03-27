@@ -1,6 +1,6 @@
 # 🇧🇷 Versão em Português
 
-![diagrama](Images/custom-vpc1.jpeg)
+![diagrama](images/custom-diagrama.png)
 
 ## Objetivo
 
@@ -79,3 +79,19 @@ Este laboratório reforça o entendimento prático de redes na AWS, comportament
 - Instâncias EC2 não respondem HTTP sem aplicação ativa.
 - Diferença prática entre Stop e Terminate.
 - Compreensão do fluxo de rede dentro da AWS.
+
+📸 ScreeShots
+
+![diagrama](images/custom-vpc1.jpeg)
+
+![diagrama](images/custom-vpc2.jpeg)
+
+![diagrama](images/custom-vpc3.jpeg)
+
+![diagrama](images/custom-vpc4.jpeg)
+
+![diagrama](images/custom-vpc5.jpeg)
+
+![diagrama](images/custom-vpc6.jpeg)
+
+
