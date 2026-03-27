@@ -1,72 +1,92 @@
 # BR Monitoramento e Alertas com CloudWatch
 
-![Architecture Diagram](images/cloudwatch0.png)
+📖 Visão Geral
 
-## Visão Geral
+Este laboratório demonstra a implementação de monitoramento básico de infraestrutura na AWS utilizando o Amazon CloudWatch, com envio de alertas via Amazon SNS.
 
-Este laboratório demonstra como monitorar uma instância EC2 utilizando Amazon CloudWatch e enviar alertas automaticamente quando o uso de recursos ultrapassa um limite definido.
+O objetivo é simular um cenário real de operação, onde métricas de uma instância EC2 são monitoradas continuamente e notificações são disparadas automaticamente quando comportamentos anômalos são detectados.
 
-O objetivo é simular um cenário real de operação, onde o monitoramento da infraestrutura detecta problemas e notifica a equipe responsável.
+                +---------------------+
+                |     Amazon VPC      |
+                |  (Public Subnet)    |
+                +----------+----------+
+                           |
+                           v
+                    +-------------+
+                    |   EC2       |
+                    | (Amazon     |
+                    |  Linux 2023)|
+                    +------+------+
+                           |
+                           v
+                  +------------------+
+                  | CloudWatch       |
+                  | Metrics & Alarms |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | SNS Topic        |
+                  +--------+---------+
+                           |
+                           v
+                     Email Notification
 
----
+🧰 Serviços Utilizados
+Amazon EC2
+Amazon CloudWatch
+Amazon SNS
+🎯 Objetivo
 
-## Arquitetura
+Configurar um alarme que dispare quando:
 
-EC2 Instance → CloudWatch Metrics → CloudWatch Alarm → SNS Topic → Email Notification
+CPUUtilization > 70%
+por 2 períodos consecutivos de 1 minuto
+⚙️ Implementação
+1. Criar infraestrutura
+Criar uma instância EC2 (t2.micro)
+Utilizar Amazon Linux 2023
+Associar Security Group com:
+SSH restrito ao seu IP
+(Recomendado) Associar uma IAM Role
+2. Criar Alarme no CloudWatch
+Métrica: EC2 → CPUUtilization
+Threshold: > 70%
+Period: 1 minute
+Evaluation periods: 2
+3. Configurar SNS
+Criar tópico: sns-infra-alerts
+Criar subscription (Email)
+Confirmar inscrição
+4. Simular carga
+yes > /dev/null &
+yes > /dev/null &
+yes > /dev/null &
+5. Encerrar teste
+killall yes
+📊 Resultado
 
----
+O alarme muda de estado:
 
-## Serviços utilizados
+OK → ALARM
 
-- Amazon EC2
-- Amazon CloudWatch
-- Amazon Simple Notification Service (SNS)
+E uma notificação é enviada via SNS para o email configurado.
 
----
-
-## Objetivo
-
-Configurar um alarme que dispare quando: CPUUtilization > 70% por 2 minutos consecutivos. Isso simula um servidor com uso anormal de CPU.
-
----
-
-## Passo a Passo
-
-**Passo 1 – Criar uma instância EC2**  
-Criar uma instância para testes utilizando: Tipo: t2.micro / AMI: Amazon Linux 2023
-
-**Passo 2 – Criar um Alarme no CloudWatch**  
-Acessar: CloudWatch → Alarms → Create Alarm  
-Selecionar a métrica: EC2 → Per-Instance Metrics → CPUUtilization
-
-**Passo 3 – Definir Condição do Alarme**  
-Configuração: CPUUtilization > 70% / Evaluation periods: 2 / Period: 1 minute
-
-**Passo 4 – Configurar Notificação**  
-Criar um tópico no SNS e cadastrar um email para receber alertas.
-
-**Passo 5 – Gerar Carga de CPU**  
-Conectar via SSH na instância e executar: yes > /dev/null & (executar 3 vezes)
-
-**Passo 6 – Encerrar o Teste**  
-Para parar o consumo de CPU: killall yes
-
----
-
-## Resultado
-
-O alarme muda de estado: OK → ALARM e envia uma notificação por email através do SNS.
-
----
-
-## Habilidades Demonstradas
-
-- Monitoramento de infraestrutura
-- Criação de alarmes
-- Automação de alertas
-- Observabilidade em ambientes cloud
-
----
+🚨 Boas Práticas (Importante)
+CPU isolada não define problema → usar múltiplas métricas
+Evitar acesso SSH aberto (usar IP restrito)
+Utilizar IAM Roles ao invés de credenciais estáticas
+Nomear recursos de forma padronizada
+🔒 Considerações de Produção
+Integrar com Auto Scaling
+Criar dashboards no CloudWatch
+Usar CloudWatch Agent para métricas avançadas
+Integrar com Lambda para automação de resposta
+🧠 Habilidades Demonstradas
+Monitoramento de infraestrutura
+Configuração de alarmes
+Automação de notificações
+Fundamentos de observabilidade
 
 ## 📷 Screenshots
 
