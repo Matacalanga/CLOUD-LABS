@@ -170,8 +170,13 @@ def cleanup(bucket):
 ---
 
 ## 📸 screenshots
+
 ![diagrama](images/pythonboto1.jpeg)
+
 ![diagrama](images/pythonboto2.jpeg)
+
 ![diagrama](images/pythonboto3.jpeg)
+
 ![diagrama](images/pythonboto4.jpeg)
+
 ![diagrama](images/pythonboto5.jpeg)
