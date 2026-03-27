@@ -9,22 +9,26 @@ This project demonstrates how to build a CI/CD pipeline for a static frontend ap
 The solution integrates a GitHub repository with AWS to enable automatic deployments whenever changes are pushed to the main branch.
 
 ```
-GitHub (push)
-     │
-     ▼
+GitHub
+   │
+   ▼
+CodeStar Connections
+   │
+   ▼
 CodePipeline
-     │
-     ▼
+   │
+   ▼
 CodeBuild (optional)
-     │
-     ▼
+   │
+   ▼
 S3 (private bucket)
-     │
-     ▼
-CloudFront (OAC)
-     │
-     ▼
-Users (HTTPS)
+   ▲
+   │ (OAC)
+   ▼
+CloudFront (HTTPS)
+   │
+   ▼
+Users
 ```
 
 
