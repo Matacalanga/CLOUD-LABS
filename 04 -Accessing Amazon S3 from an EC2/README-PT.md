@@ -152,15 +152,5 @@ Problemas comuns:
 * Diferença entre policy gerenciada e customizada
 
 ---
-📸 ScreenShots
 
-### 📸 Screenshots
- 
-![Architecture](images/role-policy1.jpeg)
-
-![Architecture](images/role-policy2.jpeg)
-
-![Architecture](images/role-policy3.jpeg)
-
-![Architecture](images/role-policy4.jpeg)
 
