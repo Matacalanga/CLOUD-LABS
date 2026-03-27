@@ -1,272 +1,131 @@
 # ☁️ Laboratório 07 — Deploy de Site Estático na AWS com CI/CD
 
-![diagrama](images/diagrama1.png)
+GitHub (push)
+     │
+     ▼
+CodePipeline
+     │
+     ▼
+CodeBuild (opcional)
+     │
+     ▼
+S3 (private bucket)
+     │
+     ▼
+CloudFront (OAC)
+     │
+     ▼
+User (HTTPS)
 
-## 📌 Objetivo
+☁️ Deploy de Site Estático com CI/CD na AWS
+📖 Visão Geral
 
-Neste laboratório foi implementado o deploy de um **site estático (HTML, CSS e JavaScript)** utilizando serviços da AWS e integração com GitHub para **deploy automático**.
+Este laboratório demonstra a implementação de um pipeline de CI/CD para aplicações frontend estáticas utilizando serviços da AWS.
 
-O objetivo foi aprender na prática como funciona um fluxo simples de **CI/CD para aplicações frontend**.
+A arquitetura segue boas práticas de segurança e distribuição, utilizando Amazon CloudFront como camada de entrega e Amazon S3 como origem privada.
 
----
+🏗️ Arquitetura
+GitHub (push)
+     │
+     ▼
+CodePipeline
+     │
+     ▼
+CodeBuild (opcional)
+     │
+     ▼
+S3 (private bucket)
+     │
+     ▼
+CloudFront (OAC)
+     │
+     ▼
+User (HTTPS)
 
-Serviços utilizados:
 
-* Amazon S3
-* Amazon CloudFront
-* AWS CodePipeline
-* AWS CodeStar Connections
-* GitHub
-
----
-
-# 🚀 Etapas do Laboratório
-
-## 1️⃣ Criação do Bucket S3
-
-Foi criado um bucket para hospedar os arquivos do site.
-
-Bucket utilizado:
-
-```
-listadetarefas-todo-site
-```
-
-O bucket foi configurado com **Static Website Hosting** habilitado.
-
----
-
-## 2️⃣ Upload do Frontend
-
-Foi realizado o upload dos arquivos do projeto:
-
-```
-index.html
-style.css
-script.js
-```
-
-O site consiste em uma aplicação simples de **Lista de Tarefas (Todo List)**.
-
-Funcionalidades:
-
-* Adicionar tarefas
-* Marcar tarefas como concluídas
-* Remover tarefas
-* Alternar modo escuro
-
----
-
-## 3️⃣ Configuração do Static Website Hosting
-
-Foi configurado o documento inicial:
-
-```
-index.html
-```
-
-Após a configuração, o site já podia ser acessado diretamente pelo endpoint do S3.
-
----
-
-## 4️⃣ Criação da CDN com CloudFront
-
-Foi criada uma distribuição no **Amazon CloudFront** utilizando o bucket S3 como origem.
-
-Benefícios da CDN:
-
-* Cache global
-* Melhor desempenho
-* Redução de latência
-* Distribuição geográfica
-
-Endpoint gerado:
-
-```
-https://d31oxct3oeh047.cloudfront.net
-```
-
----
-
-## 5️⃣ Integração com GitHub
-
-Foi criada uma conexão entre a AWS e o GitHub utilizando **AWS CodeStar Connections**.
-
-Connection name:
-
-```
-github-connection
-```
-
-Repositório utilizado:
-
-```
-Matacalanga/CLOUD-LABS
-```
-
-Branch monitorada:
-
-```
-main
-```
-
----
-
-## 6️⃣ Criação do Pipeline CI/CD
-
-Foi criado um pipeline utilizando **AWS CodePipeline**.
-
-Nome do pipeline:
-
-```
-todo-list-deploy
-```
-
-### Stage: Source
-
-Origem configurada:
-
-```
-GitHub Repository
-```
-
-Trigger automático configurado para:
-
-```
-push na branch main
-```
-
----
-
-### Stage: Build
-
-Esta etapa foi **ignoradа**, pois o projeto é um site estático.
-
----
-
-### Stage: Test
-
-Também foi **ignorada**, pois não existem testes automatizados configurados.
-
----
-
-### Stage: Deploy
-
-O deploy foi configurado para o serviço:
-
-```
+### 🧰 Serviços Utilizados
 Amazon S3
-```
+Amazon CloudFront
+AWS CodePipeline
+AWS CodeBuild
+AWS CodeStar Connections
+GitHub
+🎯 Objetivo
 
-Bucket de destino:
+### utomatizar o deploy de um site estático com:
 
-```
-listadetarefas-todo-site
-```
+Trigger automático via GitHub
+Deploy contínuo no S3
+Distribuição global via CloudFront
+Boas práticas de segurança (bucket privado)
+🔒 Arquitetura Segura (IMPORTANTE)
+S3 com Block Public Access habilitado
+Bucket NÃO público
+CloudFront acessa o bucket via Origin Access Control (OAC)
+⚙️ Pipeline CI/CD
+Stage: Source
+Origem: GitHub (branch main)
+Trigger automático via push
+Stage: Build (Recomendado)
 
-Opção habilitada:
+### Exemplo com AWS CodeBuild:
 
-```
-Extract file before deploy
-```
-
-Isso garante que os arquivos sejam extraídos corretamente no bucket.
-
----
-
-# 🔄 Teste de Deploy Automático
-
-Para validar o funcionamento do pipeline foi realizado o seguinte teste:
-
-1. Alteração no arquivo `index.html`
-2. Commit enviado para o GitHub
-3. O CodePipeline detectou automaticamente a mudança
-4. O deploy foi executado no S3
-5. O site foi atualizado
-
-Tempo médio de execução:
-
-```
-~9 segundos
-```
-
----
-
-# ⚠️ Observação sobre Cache
-
-Como o site utiliza **Amazon CloudFront**, pode ocorrer atraso na atualização devido ao cache da CDN.
-
-Para forçar a atualização foi criada uma invalidação utilizando:
-
-```
+Validação de arquivos
+Minificação (opcional)
+Preparação de artefatos
+Stage: Deploy
+Deploy para S3 usando sync
+Remoção de arquivos antigos
+Stage: Post-Deploy (Melhoria crítica)
+Invalidação automática do CloudFront:
 /*
-```
 
----
+### 🔄 Fluxo de Deploy
+Desenvolvedor faz push no GitHub
+Pipeline é acionado automaticamente
+(Opcional) Build é executado
+Arquivos são enviados ao S3
+Cache do CloudFront é invalidado
+Nova versão disponível globalmente
 
-# 📸 Screenshots do Laboratório
+### 📊 Resultado
+Deploy automatizado funcional
+Distribuição global via CDN
+Arquitetura segura (sem bucket público)
 
-### 1 — Criação do Bucket S3
+🚨 Boas Práticas Aplicadas
+Princípio do menor privilégio (IAM)
+Origem privada no S3
+Automação de deploy
+Uso de CDN para performance
 
-(Adicionar imagem aqui)
+🔧 Considerações de Produção
+Versionamento de assets (cache busting)
+Logs do CloudFront
+WAF (proteção adicional)
+HTTPS com domínio customizado
+Monitoramento com CloudWatch
 
-### 2 — Upload dos Arquivos
+🧠 Habilidades Demonstradas
+CI/CD na AWS
+Integração com GitHub
+Distribuição de conteúdo global
+Segurança em aplicações estáticas
 
-(Adicionar imagem aqui)
 
-### 3 — Configuração do Static Website Hosting
-
-(Adicionar imagem aqui)
-
-### 4 — Criação da Distribuição CloudFront
-
-(Adicionar imagem aqui)
-
-### 5 — Conexão com GitHub
-
-(Adicionar imagem aqui)
-
-### 6 — Criação do Pipeline
-
-(Adicionar imagem aqui)
-
-### 7 — Execução do Pipeline
-
-(Adicionar imagem aqui)
-
----
-
-# 🎯 Resultado Final
-
-Foi implementado com sucesso um fluxo simples de **CI/CD para deploy de site estático na AWS**.
-
-Principais aprendizados:
-
-* Hospedagem de sites estáticos com S3
-* Distribuição global utilizando CloudFront
-* Integração entre AWS e GitHub
-* Automação de deploy com CodePipeline
-* Conceitos básicos de CI/CD
-
----
-
-# 📚 Próximos Passos
-
-Possíveis melhorias para este projeto:
-
-* Automação de invalidação de cache do CloudFront
-* Uso de GitHub Actions para deploy
-* Infraestrutura como código com AWS CloudFormation ou CDK
-* Adição de domínio customizado
-* Configuração de HTTPS completo
-
-  📸 VEJA:
+  ### 📸 ScreenShots
   ![diagrama](images/StaticWebsite1.jpeg)
+  
   ![diagrama](images/StaticWebsite2.jpeg)
+  
   ![diagrama](images/StaticWebsite3.jpeg)
+  
   ![diagrama](images/StaticWebsite4.jpeg)
+  
   ![diagrama](images/StaticWebsite5.jpeg)
+  
   ![diagrama](images/StaticWebsite6.jpeg)
+  
   ![diagrama](images/StaticWebsite7.jpeg)
 
 
