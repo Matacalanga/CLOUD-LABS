@@ -9,23 +9,26 @@ Este laboratório demonstra a implementação de um pipeline de CI/CD para aplic
 A arquitetura segue boas práticas de segurança e distribuição, utilizando Amazon CloudFront como camada de entrega e Amazon S3 como origem privada.
 
 ```
-🏗️ Arquitetura
-GitHub (push)
-     │
-     ▼
+GitHub
+   │
+   ▼
+CodeStar Connections
+   │
+   ▼
 CodePipeline
-     │
-     ▼
-CodeBuild (opcional)
-     │
-     ▼
+   │
+   ▼
+CodeBuild (optional)
+   │
+   ▼
 S3 (private bucket)
-     │
-     ▼
-CloudFront (OAC)
-     │
-     ▼
-User (HTTPS)
+   ▲
+   │ (OAC)
+   ▼
+CloudFront (HTTPS)
+   │
+   ▼
+Users
 ```
 
 ### 🧰 Serviços Utilizados
