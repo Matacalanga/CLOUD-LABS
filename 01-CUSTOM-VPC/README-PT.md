@@ -4,6 +4,7 @@
 ### DIAGRAMA DE ARQUITETURA
 
 ```
+
        Internet
           |
   [Internet Gateway]
@@ -29,7 +30,9 @@
 | Route Table:         |
 | (sem internet)       |
 -------------------------
+
 ´´´
+
 
 ### OBJETIVO
 
