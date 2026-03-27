@@ -1,205 +1,171 @@
-# 🚀 Lab 09 — DevOps com Python e Boto3 na AWS
-
-![Architecture Diagram](images/pythonboto.png)
-
-Este laboratório demonstra, na prática, como automatizar tarefas na AWS utilizando Python e o SDK Boto3, seguindo princípios de DevOps e Infrastructure as Code (IaC).
+# AWS Lab 09 — DevOps com Python e Boto3
 
 ---
 
-## 📌 Objetivo
-
-Automatizar operações na AWS de forma programática, incluindo:
-
-- Autenticação segura via CLI
-- Criação de infraestrutura (S3)
-- Scripts idempotentes
-- Upload de arquivos
-- Deploy de diretórios
-- Limpeza automática de recursos
+## 🇧🇷 VERSÃO EM PORTUGUÊS
 
 ---
 
-## 🧰 Tecnologias Utilizadas
-
-- Python 3.x  
-- Boto3 (AWS SDK for Python)  
-- AWS CLI  
-- Amazon S3  
-- IAM (Identity and Access Management)  
-
----
-
-## 🏗️ Arquitetura do Laboratório
+## 📐 DIAGRAMA DE ARQUITETURA
 
 ```
-[ Python Scripts ]
-        ↓
-[ Boto3 SDK ]
-        ↓
-[ AWS CLI / Credenciais IAM ]
-        ↓
-[ AWS API ]
-        ↓
-[ Amazon S3 ]
+Developer
+   |
+   | Executa Script Python
+   ↓
+[Boto3 SDK]
+   |
+   | Autenticação (IAM / CLI / Env)
+   ↓
+[AWS API]
+   |
+   ↓
+[Amazon S3]
 ```
 
 ---
 
-## ⚙️ Pré-requisitos
+## 📌 OBJETIVO
 
-Antes de iniciar, você precisa:
-
-- Conta ativa na AWS  
-- AWS CLI instalado  
-- Python instalado  
-- Usuário IAM com permissões adequadas  
-- Ambiente virtual Python configurado  
+Automatizar operações na AWS utilizando Python e Boto3, aplicando conceitos de **DevOps** e **Infrastructure as Code (IaC)**.
 
 ---
 
-## 🔐 Configuração de Credenciais
+## 🧠 VISÃO DEVOPS
 
-Execute:
+Este laboratório demonstra como substituir operações manuais por automação programática, permitindo:
+
+* Repetibilidade
+* Escalabilidade
+* Redução de erro humano
+
+---
+
+## 🧰 TECNOLOGIAS
+
+* Python 3
+* Boto3
+* AWS CLI
+* Amazon S3
+* IAM
+
+---
+
+## ⚠️ AUTENTICAÇÃO (IMPORTANTE)
+
+Para ambiente de laboratório foi utilizado:
 
 ```
 aws configure
 ```
 
-Informe:
+### 🔴 Em produção:
 
-```
-AWS Access Key ID
-AWS Secret Access Key
-Region: us-east-1
-Output: json
-```
+* Utilizar IAM Roles
+* Evitar uso de Access Keys locais
 
 ---
 
-## 📂 Estrutura do Projeto
+## 📂 ESTRUTURA DO PROJETO
 
 ```
 aws-lab-09-boto3/
-│
-├── list_s3.py
-├── create_bucket.py
-├── ensure_bucket.py
-├── upload_file.py
-├── list_objects.py
-├── deploy_folder.py
-├── cleanup_bucket.py
-│
-├── deploy/
-│   ├── index.html
-│   └── app.js
-│
-└── arquivo.txt
+├── scripts/
+│   ├── list_s3.py
+│   ├── create_bucket.py
+│   ├── ensure_bucket.py
+│   ├── upload_file.py
+│   ├── deploy_folder.py
+│   └── cleanup_bucket.py
 ```
 
 ---
 
-## 🧪 Etapas do Laboratório
+## 🧪 EXEMPLO DE AUTOMAÇÃO
 
-### 1. Listar Buckets S3
+### Criação de Bucket com Boto3
 
-```
-python list_s3.py
-```
+```python
+import boto3
 
-### 2. Criar Bucket
+s3 = boto3.client("s3")
 
-```
-python create_bucket.py
-```
-
-### 3. Script Idempotente
-
-Evita erro caso o bucket já exista:
-
-```
-python ensure_bucket.py
-```
-
-### 4. Upload de Arquivo
-
-```
-python upload_file.py
-```
-
-### 5. Listar Objetos do Bucket
-
-```
-python list_objects.py
-```
-
-### 6. Deploy de Pasta Completa
-
-```
-python deploy_folder.py
-```
-
-### 7. Limpeza do Bucket
-
-```
-python cleanup_bucket.py
+def create_bucket(bucket_name):
+    s3.create_bucket(Bucket=bucket_name)
 ```
 
 ---
 
-## 🧠 Conceitos DevOps Aplicados
+## 🔁 IDEMPOTÊNCIA
 
-- Automação de infraestrutura  
-- Idempotência  
-- Integração com APIs AWS  
-- Deploy automatizado  
-- Scripts reutilizáveis  
-- Gerenciamento de credenciais  
+Script garante que o bucket exista sem erro:
 
----
+```python
+import boto3
+from botocore.exceptions import ClientError
 
-## ⚠️ Boas Práticas
+s3 = boto3.client("s3")
 
-- Nunca versionar Access Keys  
-- Utilizar IAM com menor privilégio possível  
-- Evitar nomes fixos para buckets (usar nomes únicos)  
-- Utilizar variáveis de ambiente em produção  
-- Monitorar custos no AWS Billing  
-
----
-
-## 💡 Possíveis Evoluções
-
-- Provisionar EC2 com Boto3  
-- Criar pipelines CI/CD  
-- Automatizar backups  
-- Deploy de site estático completo  
-- Integração com Terraform  
-
----
-
-## 🧹 Limpeza de Recursos
-
-Para evitar custos:
-
-```
-python cleanup_bucket.py
+def ensure_bucket(bucket_name):
+    try:
+        s3.head_bucket(Bucket=bucket_name)
+    except ClientError:
+        s3.create_bucket(Bucket=bucket_name)
 ```
 
-E opcionalmente deletar o bucket via console AWS.
+---
+
+## 📤 UPLOAD DE ARQUIVO
+
+```python
+s3.upload_file("arquivo.txt", bucket_name, "arquivo.txt")
+```
 
 ---
 
-## 📚 Referências
+## 📁 DEPLOY DE DIRETÓRIO
 
-- https://boto3.amazonaws.com/v1/documentation/api/latest/index.html  
-- https://docs.aws.amazon.com/cli/  
-- https://aws.amazon.com/s3/  
+Automatiza envio de múltiplos arquivos para o S3.
 
 ---
 
-## 📸 screenshots
-![diagrama](images/pythonboto1.jpeg)
-![diagrama](images/pythonboto2.jpeg)
-![diagrama](images/pythonboto3.jpeg)
-![diagrama](images/pythonboto4.jpeg)
-![diagrama](images/pythonboto5.jpeg)
+## 🧹 LIMPEZA DE RECURSOS
+
+```python
+def cleanup(bucket):
+    objects = s3.list_objects_v2(Bucket=bucket)
+    for obj in objects.get("Contents", []):
+        s3.delete_object(Bucket=bucket, Key=obj["Key"])
+```
+
+---
+
+## 🧠 CONCEITOS APLICADOS
+
+* Automação com SDK
+* Idempotência
+* Interação com APIs AWS
+* Deploy automatizado
+* Gerenciamento de recursos
+
+---
+
+## ⚠️ BOAS PRÁTICAS
+
+* Nunca versionar credenciais
+* Utilizar IAM Roles
+* Usar nomes únicos para buckets
+* Implementar tratamento de erro
+* Monitorar custos
+
+---
+
+## 🚀 EVOLUÇÃO
+
+* Automação de EC2
+* Integração com CI/CD
+* Uso de Lambda
+* Infraestrutura com Terraform
+
+---
+
