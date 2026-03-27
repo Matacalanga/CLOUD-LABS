@@ -1,8 +1,37 @@
-# 🇧🇷 Versão em Português
+# 🇧🇷 VERSÃO EM PORTUGUÊS
 
-![diagrama](images/custom-diagrama.png)
+       Internet
+          |
+  [Internet Gateway]
+          |
+-------------------------
+|        VPC            |
+|    10.0.0.0/16       |
+|                      |
+|  Public Subnet       |
+|  10.0.1.0/24         |
+|   |                  |
+| [EC2 Public]         |
+|   |                  |
+| Route Table:         |
+| 0.0.0.0/0 → IGW      |
+|                      |
+|----------------------|
+|  Private Subnet      |
+|  10.0.2.0/24         |
+|   |                  |
+| [EC2 Private]        |
+|   |                  |
+| Route Table:         |
+| (sem internet)       |
+-------------------------
 
-## Objetivo
+## OBJETIVO
+
+Criar uma VPC com segmentação de rede
+Implementar subnet pública e privada
+Configurar acesso à internet via Internet Gateway
+Demonstrar isolamento de recursos
 
 Projetar e implantar uma arquitetura de VPC personalizada na AWS contendo subnets pública e privada, configurar conectividade com a internet e lançar uma instância EC2 acessível via SSH e HTTP.
 
@@ -10,36 +39,49 @@ Este laboratório reforça o entendimento prático de redes na AWS, comportament
 
 ---
 
-## Visão Geral da Arquitetura
+## VISÃO GERAL DE ARQUITETURA
 
-- CIDR da VPC: 10.0.0.0/16
-- Subnet Pública: 10.0.1.0/24
-- Subnet Privada: 10.0.2.0/24
-- Internet Gateway anexado à VPC
-- Tabela de Rotas Pública com rota:
-  - 0.0.0.0/0 → Internet Gateway
-- Instância EC2 implantada na subnet pública
-- Security Group permitindo:
-  - SSH (Porta 22 – restrito ao meu IP)
-  - HTTP (Porta 80 – 0.0.0.0/0)
+Este laboratório demonstra a criação de uma VPC customizada na AWS, incluindo subnets públicas e privadas, com o objetivo de entender isolamento de rede e controle de acesso.
 
----
+--- A VPC foi criada com o bloco CIDR 10.0.0.0/16, permitindo expansão futura.
 
-## Configuração da VPC
+--- A subnet pública (10.0.1.0/24) possui acesso à internet via Internet Gateway.
 
----
+--- A subnet privada (10.0.2.0/24) não possui acesso direto à internet, garantindo isolamento.
 
-## Configuração das Subnets
+--- As rotas foram configuradas separadamente para cada subnet.
 
----
 
-## Configuração da Tabela de Rotas
+## FLUXO DE COMUNICAÇÃO
 
----
+1- Recursos na subnet pública acessam a internet através do Internet Gateway.
 
-## Regras do Security Group
+2- Recursos na subnet privada não possuem acesso direto à internet.
 
----
+3- Comunicação entre subnets ocorre internamente via rede da VPC.
+
+## SEGURANÇA
+
+1- Subnet privada isolada da internet
+
+2- Controle de tráfego via route tables
+
+3- Uso de arquitetura segmentada para reduzir superfície de ataque
+
+
+## CUSTOS
+
+Este laboratório utiliza recursos dentro do Free Tier (VPC, subnets, route tables).
+
+Não há custos adicionais significativos, exceto se instâncias EC2 forem adicionadas.
+
+
+## LIMITAÇÕES
+
+A subnet privada não possui acesso à internet (sem NAT Gateway).
+
+Este ambiente não é adequado para aplicações que exigem acesso externo.
+
 
 ## Instância EC2 em Execução
 
