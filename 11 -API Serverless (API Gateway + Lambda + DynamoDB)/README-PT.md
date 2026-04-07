@@ -217,3 +217,14 @@ Você construiu:
 * Arquitetura cloud-native
 * Integração síncrona
 
+
+  ## 📸screenshots
+  
+![Architecture Diagram](images/api_serveless1.jpeg)
+
+![Architecture Diagram](images/api_serveless2.jpeg)
+
+![Architecture Diagram](images/api_serveless3.jpeg)
+
+![Architecture Diagram](images/api_serveless4.jpeg)
+
