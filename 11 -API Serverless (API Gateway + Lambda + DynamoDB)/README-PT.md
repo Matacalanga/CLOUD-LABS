@@ -220,11 +220,13 @@ Você construiu:
 
   ## 📸screenshots
   
-![Architecture Diagram](images/api_serveless1.jpeg)
+![Architecture Diagram](images/api_serverless1.jpeg)
 
-![Architecture Diagram](images/api_serveless2.jpeg)
+![Architecture Diagram](images/api_serverless2.jpeg)
 
-![Architecture Diagram](images/api_serveless3.jpeg)
+![Architecture Diagram](images/api_serverless3.jpeg)
 
-![Architecture Diagram](images/api_serveless4.jpeg)
+![Architecture Diagram](images/api_serverless4.jpeg)
+
+![Architecture Diagram](images/api_serverless5.jpeg)
 
