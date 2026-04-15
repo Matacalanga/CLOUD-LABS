@@ -124,4 +124,23 @@ Este laboratório implementa:
 - Identificação por usuário  
 - Multi-tenant com DynamoDB  
 - Arquitetura segura  
-- Backend serverless pronto para produção  
+- Backend serverless pronto para produção
+
+  📸 ScreenShots
+
+
+   ![Architecture Diagram](images/api_protegida1.jpeg)
+
+   ![Architecture Diagram](images/api_protegida2.jpeg)
+
+   ![Architecture Diagram](images/api_protegida3.jpeg)
+
+   ![Architecture Diagram](images/api_protegida4.jpeg)
+  
+   ![Architecture Diagram](images/api_protegida5.jpeg)
+
+   ![Architecture Diagram](images/api_protegida6.jpeg)
+
+   ![Architecture Diagram](images/api_protegida7.jpeg)
+     
+
