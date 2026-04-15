@@ -1,10 +1,13 @@
-🚀 Lab 12 — API Serverless Protegida (API Gateway + Lambda + DynamoDB + Cognito)
-🏗 Arquitetura
+# 🚀 Lab 12 — API Serverless Protegida (API Gateway + Lambda + DynamoDB + Cognito)
+
+## 🏗 Arquitetura
+
+```
 Client
   │
   ▼
-Amazon Cognito
-  │ (JWT Token)
+Amazon Cognito (JWT Token)
+  │
   ▼
 API Gateway (JWT Authorizer)
   │
@@ -13,143 +16,112 @@ Lambda Function
   │
   ▼
 DynamoDB (userId partition key)
+```
 
-Este laboratório evolui a API serverless criada anteriormente adicionando autenticação utilizando Amazon Cognito e validação de JWT no API Gateway.
+Este laboratório evolui a API serverless criada anteriormente adicionando autenticação utilizando Amazon Cognito e validação de JWT no API Gateway.  
 O objetivo foi transformar uma API pública em uma API multi-usuário segura, onde apenas usuários autenticados podem acessar os dados.
 
-🎯 Objetivo
+---
+
+## 🎯 Objetivo
 
 Implementar autenticação gerenciada e proteger rotas da API garantindo:
 
-Acesso apenas para usuários autenticados
-Identificação única por usuário
-Isolamento de dados (multi-tenant)
-Segurança sem backend de autenticação próprio
-🔐 Autenticação com Cognito
+- Acesso apenas para usuários autenticados  
+- Identificação única por usuário  
+- Isolamento de dados (multi-tenant)  
+- Segurança sem backend de autenticação próprio  
 
-O Amazon Cognito foi utilizado como provedor de identidade responsável pela autenticação e geração de tokens JWT.
+---
+
+## 🔐 Autenticação com Cognito
+
+O Amazon Cognito foi utilizado como provedor de identidade responsável pela autenticação e geração de tokens JWT.  
 Essa escolha elimina a necessidade de implementar manualmente login, armazenamento de usuários e assinatura de tokens.
 
-O cliente solicita um token ao Cognito e recebe um JWT assinado contendo informações do usuário.
+O cliente solicita um token ao Cognito e recebe um JWT assinado contendo informações do usuário.  
 Esse token é enviado no header Authorization para o API Gateway.
 
 Essa abordagem permite autenticação gerenciada, escalável e integrada nativamente com a AWS.
 
-🛡 Proteção da API com JWT Authorizer
+---
 
-O API Gateway foi configurado com JWT Authorizer apontando para o Cognito como issuer.
+## 🛡 Proteção da API com JWT Authorizer
+
+O API Gateway foi configurado com JWT Authorizer apontando para o Cognito como issuer.  
 Com isso, o token é validado antes da requisição chegar à Lambda.
 
-Requests sem token ou com token inválido são bloqueadas automaticamente pelo API Gateway.
+Requests sem token ou com token inválido são bloqueadas automaticamente pelo API Gateway.  
 A Lambda passa a executar apenas para requisições autenticadas, reduzindo custo e centralizando a segurança.
 
-👤 Identificação do Usuário
+---
 
-Após a validação do JWT, o API Gateway injeta os claims do token no evento da Lambda.
-O identificador único do usuário é obtido do claim sub.
+## 👤 Identificação do Usuário
 
+Após a validação do JWT, o API Gateway injeta os claims do token no evento da Lambda.  
+O identificador único do usuário é obtido do claim `sub`.
+
+```python
 claims = event["requestContext"]["authorizer"]["jwt"]["claims"]
 user_id = claims["sub"]
+```
 
-Esse valor é utilizado como userId no DynamoDB, permitindo separar os dados por usuário.
+Esse valor é utilizado como `userId` no DynamoDB, permitindo separar os dados por usuário.
 
 Essa estratégia transforma a API em multi-tenant utilizando apenas uma tabela.
 
-🔄 Evolução em relação ao Lab anterior
+---
+
+## 🔄 Evolução em relação ao Lab anterior
 
 Lab anterior:
 
-API pública
-Usuário fixo
-Sem autenticação
-Dados compartilhados
+- API pública  
+- Usuário fixo  
+- Sem autenticação  
+- Dados compartilhados  
 
 Este laboratório:
 
-API protegida
-Usuário autenticado
-JWT validation
-Multi-tenant
-Isolamento por usuário
+- API protegida  
+- Usuário autenticado  
+- JWT validation  
+- Multi-tenant  
+- Isolamento por usuário  
 
-A API passa de um exemplo simples para uma arquitetura segura.
+---
 
-⚖️ Decisão de Arquitetura
+## ⚖️ Decisão de Arquitetura
 
 Foi escolhido Amazon Cognito em vez de autenticação manual.
 
 Cognito fornece:
 
-Gerenciamento de usuários
-Geração de JWT
-Assinatura de tokens
-Integração com API Gateway
-Escalabilidade automática
+- Gerenciamento de usuários  
+- Geração de JWT  
+- Assinatura de tokens  
+- Integração com API Gateway  
+- Escalabilidade automática  
 
 Uma implementação manual exigiria:
 
-Banco de usuários
-Hash de senha
-JWT custom
-Refresh tokens
-Rotação de chaves
-Manutenção de segurança
+- Banco de usuários  
+- Hash de senha  
+- JWT custom  
+- Refresh tokens  
+- Rotação de chaves  
+- Manutenção de segurança  
 
-Isso aumentaria complexidade operacional.
+---
 
-🧠 Implementação
-
-A Lambda foi modificada para utilizar o usuário autenticado ao criar itens.
-
-import json
-import uuid
-import boto3
-from datetime import datetime
-
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Tasks')
-
-def lambda_handler(event, context):
-
-    claims = event["requestContext"]["authorizer"]["jwt"]["claims"]
-    user_id = claims["sub"]
-
-    body = json.loads(event["body"])
-
-    item = {
-        "id": str(uuid.uuid4()),
-        "userId": user_id,
-        "title": body["title"],
-        "status": "pending",
-        "createdAt": datetime.utcnow().isoformat()
-    }
-
-    table.put_item(Item=item)
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps(item)
-    }
-
-Cada item agora pertence a um usuário específico.
-
-🧪 Validação
-
-Requisições com token válido retornam dados normalmente.
-Requisições sem token retornam:
-
-Unauthorized
-
-Isso confirma que a validação está ocorrendo no API Gateway.
-
-✅ Resultado
+## ✅ Resultado
 
 Este laboratório implementa:
 
-API serverless protegida
-Autenticação com Cognito
-Validação JWT no API Gateway
-Identificação por usuário
-Multi-tenant com DynamoDB
-Arquitetura segura
-Backend serverless pronto para produção
+- API serverless protegida  
+- Autenticação com Cognito  
+- Validação JWT no API Gateway  
+- Identificação por usuário  
+- Multi-tenant com DynamoDB  
+- Arquitetura segura  
+- Backend serverless pronto para produção  
