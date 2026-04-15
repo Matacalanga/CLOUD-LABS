@@ -130,3 +130,19 @@ This lab implements:
 - Secure architecture  
 - Production-ready serverless backend  
 ```
+📸 Screeshots
+
+
+  ![Architecture Diagram](images/api_protegida1.jpeg)
+
+   ![Architecture Diagram](images/api_protegida2.jpeg)
+
+   ![Architecture Diagram](images/api_protegida3.jpeg)
+
+   ![Architecture Diagram](images/api_protegida4.jpeg)
+  
+   ![Architecture Diagram](images/api_protegida5.jpeg)
+
+   ![Architecture Diagram](images/api_protegida6.jpeg)
+
+   ![Architecture Diagram](images/api_protegida7.jpeg)
