@@ -1,88 +1,80 @@
 # 🧪 Lab 11 — API Serverless com AWS (API Gateway + Lambda + DynamoDB)
 
-## 🎯 Objetivo
+## 🏗 Arquitetura
 
-Criar uma API REST completamente serverless utilizando AWS, sem necessidade de provisionar servidores.
+```
+Client
+  │
+  ▼
+API Gateway (HTTP API)
+  │
+  ▼
+Lambda Function (createTask)
+  │
+  ▼
+DynamoDB (Tasks table)
+```
 
-A API permitirá criar tarefas e armazená-las em um banco NoSQL com baixa latência e escalabilidade automática.
+Este laboratório implementa uma API REST totalmente serverless utilizando API Gateway, Lambda e DynamoDB.  
+O objetivo foi construir um backend capaz de receber requisições HTTP, executar lógica de negócio e persistir dados sem provisionar ou gerenciar servidores.
+
+A arquitetura segue um fluxo síncrono onde o API Gateway expõe o endpoint, a Lambda executa a lógica e o DynamoDB armazena os dados.
 
 ---
 
-# 🏗 Arquitetura
+## 🎯 Objetivo
 
-Client → API Gateway → Lambda → DynamoDB
+Construir uma API REST serverless capaz de:
+
+- Receber requisições HTTP  
+- Executar lógica de negócio  
+- Persistir dados em banco NoSQL  
+- Escalar automaticamente  
+- Operar sem gerenciamento de servidores  
+
+---
+
+## 🛠 Decisão de Arquitetura
+
+O API Gateway foi utilizado como ponto de entrada HTTP responsável por rotear as requisições para a Lambda.  
+A Lambda executa a lógica da aplicação e grava os dados no DynamoDB.
+
+Esse modelo elimina a necessidade de servidores de aplicação e permite escalabilidade automática baseada na quantidade de requisições.
 
 Fluxo da requisição:
 
-POST /tasks
-↓
-API Gateway
-↓
-Lambda (createTask)
-↓
-DynamoDB (Tasks)
+POST /tasks → API Gateway → Lambda → DynamoDB
 
 ---
 
-# 🧠 Cenário
+## 📦 Camada de Dados (DynamoDB)
 
-Uma aplicação precisa de um backend simples para gerenciamento de tarefas:
-
-* Criar tarefas
-* Persistir dados
-* Escalar automaticamente
-* Não gerenciar servidores
-
-A solução será totalmente serverless.
-
----
-
-# 🔧 Serviços Utilizados
-
-* Amazon API Gateway
-* AWS Lambda
-* Amazon DynamoDB
-* AWS IAM
-
----
-
-# 📦 Passo 1 — Criar tabela DynamoDB
-
-Tabela:
-
-Tasks
-
-Partition key:
-
-id (String)
+O DynamoDB foi escolhido como camada de persistência devido à baixa latência e modelo serverless.  
+Uma tabela chamada `Tasks` armazena os itens utilizando UUID como chave primária.
 
 Exemplo de item:
 
+```json
 {
-"id": "1",
-"title": "Estudar AWS",
-"status": "pending"
+  "id": "uuid",
+  "title": "Estudar AWS",
+  "status": "pending"
 }
+```
+
+Esse schema suporta operações simples de escrita sem necessidade de modelagem relacional.
 
 ---
 
-# 📦 Passo 2 — Criar função Lambda
+## ⚙️ Camada de Compute (Lambda)
 
-Nome:
+A função Lambda é responsável por:
 
-createTask
-
-Runtime:
-
-Python 3.12
-
-Adicionar permissão IAM:
-
-AmazonDynamoDBFullAccess
-
----
-
-# 📦 Passo 3 — Código da Lambda
+- Ler o body da requisição HTTP  
+- Gerar ID único  
+- Criar objeto da task  
+- Persistir no DynamoDB  
+- Retornar resposta HTTP  
 
 ```python
 import json
@@ -115,111 +107,73 @@ def lambda_handler(event, context):
     }
 ```
 
-Deploy da função.
+A função executa sob demanda e escala automaticamente conforme o volume de requisições.
 
 ---
 
-# 📦 Passo 4 — Criar API Gateway
+## 🌐 Camada de API (API Gateway)
 
-Tipo:
+O API Gateway expõe o endpoint HTTP e integra diretamente com a Lambda.  
+Uma rota POST `/tasks` foi configurada para invocar a função createTask.
 
-HTTP API
+Essa abordagem fornece:
 
-Configuração:
-
-Method: POST
-Route: /tasks
-Integration: createTask
-Stage: dev
-
----
-
-# 🌐 Endpoint
-
-POST /tasks
-
-Invoke URL:
-
-https://xxxxx.execute-api.us-east-1.amazonaws.com/tasks
+- Endpoint HTTP gerenciado  
+- Integração nativa com Lambda  
+- Escalabilidade automática  
+- Sem provisionamento de servidores  
 
 ---
 
-# 🧪 Teste da API
+## ⚖️ Decisões Técnicas
 
-Request:
+### API Gateway
 
-{
-"title": "Minha primeira task"
-}
+Utilizado para expor endpoints HTTP sem necessidade de servidores web.  
+Gerencia roteamento e integração com Lambda.
 
-Resposta:
+### Lambda
 
-{
-"message": "Task created",
-"id": "uuid"
-}
+Escolhida como camada de execução por ser event-driven e serverless.  
+Executa apenas sob demanda e escala automaticamente.
 
----
+### DynamoDB
 
-# 📊 Item salvo no DynamoDB
+Selecionado como banco de dados devido a:
 
-{
-"id": "uuid",
-"title": "Minha primeira task",
-"status": "pending"
-}
+- Escala automática  
+- Baixa latência  
+- Sem gerenciamento de conexão  
+- Modelo serverless  
 
 ---
 
-# 🧠 O que você precisa saber explicar
+## 🔄 Fluxo da Requisição
 
-## Por que API Gateway?
-
-* expõe endpoint HTTP
-* gerencia rotas
-* integração com Lambda
-* throttling
-* autenticação
-
-## Por que Lambda?
-
-* execução sob demanda
-* sem servidor
-* escala automática
-* custo por execução
-
-## Por que DynamoDB?
-
-* NoSQL
-* baixa latência
-* escala horizontal
-* totalmente gerenciado
+1. Cliente envia POST para `/tasks`  
+2. API Gateway recebe requisição HTTP  
+3. Lambda executa lógica de negócio  
+4. Item é salvo no DynamoDB  
+5. Lambda retorna resposta HTTP  
 
 ---
 
-# ⚖️ Trade-offs
+## ✅ Resultado
 
-DynamoDB | RDS
-NoSQL | SQL
-Escala automática | Provisionamento manual
-Baixa latência | Queries complexas
-Simples | Mais controle
+Este laboratório implementa:
+
+- API REST serverless  
+- Endpoint HTTP com API Gateway  
+- Camada de execução com Lambda  
+- Persistência NoSQL com DynamoDB  
+- Arquitetura totalmente gerenciada  
+- Escalabilidade automática  
+- Backend cloud-native  
 
 ---
 
-# 🎯 Resultado
+## 📸 Screenshots
 
-Você construiu:
-
-* API REST serverless
-* Backend real
-* Persistência NoSQL
-* Arquitetura cloud-native
-* Integração síncrona
-
-
-  ## 📸screenshots
-  
 ![Architecture Diagram](images/api_serverless1.jpeg)
 
 ![Architecture Diagram](images/api_serverless2.jpeg)
@@ -229,4 +183,3 @@ Você construiu:
 ![Architecture Diagram](images/api_serverless4.jpeg)
 
 ![Architecture Diagram](images/api_serverless5.jpeg)
-
